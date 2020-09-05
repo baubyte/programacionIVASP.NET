@@ -22,11 +22,11 @@
              *Guardamos en "ahora"
              */
             var ahora = new Date();
-            /**Obtenemos sola la Hora*/
+            /**Obtenemos solo la Hora*/
             var horas = ahora.getHours();
-            /**Obtenemos sola la Minutos*/
+            /**Obtenemos solo los Minutos*/
             var minutos = ahora.getMinutes();
-            /**Obtenemos sola la Segundos*/
+            /**Obtenemos solo los Segundos*/
             var segundos = ahora.getSeconds();
             /**Para obtener la hora en formato 12hs */
             var valorHora = "" + ((horas > 12) ? horas -12 : horas)
