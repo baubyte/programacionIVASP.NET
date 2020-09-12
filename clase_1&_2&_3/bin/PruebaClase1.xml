@@ -37,6 +37,33 @@ PruebaClase1
  Devuelve el objeto de registro Asp.
  </summary>
 </member>
+<member name="F:PruebaClase1.Clientes._form1">
+<summary>
+Control form1.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:PruebaClase1.Clientes._lblCliente">
+<summary>
+Control lblCliente.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:PruebaClase1.Clientes._Button1">
+<summary>
+Control Button1.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:PruebaClase1._Default._form1">
 <summary>
 Control form1.
@@ -76,6 +103,42 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:PruebaClase1._Default._txtPrueba">
 <summary>
 Control txtPrueba.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:PruebaClase1._Default._btnClientes">
+<summary>
+Control btnClientes.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:PruebaClase1._Default._btnGoogle">
+<summary>
+Control btnGoogle.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:PruebaClase1._Default._lstLista">
+<summary>
+Control lstLista.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:PruebaClase1._Default._btnPDF">
+<summary>
+Control btnPDF.
 </summary>
 <remarks>
 Campo generado automáticamente.

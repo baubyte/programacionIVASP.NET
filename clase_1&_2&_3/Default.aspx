@@ -69,6 +69,21 @@
 		<p>
 			<asp:TextBox ID="txtPrueba" runat="server"></asp:TextBox>
 		</p>
+        <p>
+            <asp:Button ID="btnClientes" runat="server" Text="Ver Clientes" style="height: 26px" />
+        </p>
+        <p>
+           <asp:Button ID="btnGoogle" runat="server" Text="Google" />
+        </p>
+
+        <asp:ListBox ID="lstLista" runat="server" AutoPostBack="True" Width="84px">
+            <asp:ListItem Value="https://github.com/">GitHub</asp:ListItem>
+            <asp:ListItem Value="https://es.stackoverflow.com/">StackOverflow</asp:ListItem>
+            <asp:ListItem Value="https://mail.google.com/mail/u/0/#inbox">Gmail</asp:ListItem>
+        </asp:ListBox>
+        <br />
+        <asp:Button ID="btnPDF" runat="server" Text="Clase 3" />
+
     </form>
 </body>
 </html>
