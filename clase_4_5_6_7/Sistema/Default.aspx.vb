@@ -422,7 +422,7 @@ Public Class _Default
         Try
             If con.State = ConnectionState.Closed Then con.Open()
             If Sql_de_accion.ToUpper.IndexOf("INSERT") Then
-                MsgBox(Sql_de_accion)
+                'MsgBox(Sql_de_accion)
                 adapter.InsertCommand = New SqlCommand(Sql_de_accion, con)
                 adapter.InsertCommand.ExecuteNonQuery()
             Else
@@ -481,9 +481,226 @@ Public Class _Default
             Return True
         End If
     End Function
-
-    Protected Sub ddlTipoDocU_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlTipoDocU.SelectedIndexChanged
-
+#End Region
+#Region "Limpiar Errores Nodificar Datos Personales"
+    'Funcion para Limpiar y Oculatar el Label que Muestra los Errores de Cada Campo 
+    Sub limpiarErroresModificarDatosU()
+        'Dejamos Vacios todos los campos
+        lblErrorEdit.Text = ""
+        lblErrorEmailUedit.Text = ""
+        lblErrorLocalidadUedit.Text = ""
+        lblErrorDireccionUedit.Text = ""
+        lblErrorTelefonoUedit.Text = ""
+        lblErrorUsuarioUedit.Text = ""
+        lblErrorClaveUedit.Text = ""
+        'Ocultamos los Labels de los Errores
+        lblErrorEdit.Visible = False
+        lblErrorEmailUedit.Visible = False
+        lblErrorLocalidadUedit.Visible = False
+        lblErrorDireccionUedit.Visible = False
+        lblErrorTelefonoUedit.Visible = False
+        lblErrorUsuarioUedit.Visible = False
+        lblErrorClaveUedit.Visible = False
     End Sub
 #End Region
+    Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
+        Session("QueEs") = "Usuarios"
+        Loguea()
+    End Sub
+#Region "Loguear Usuario"
+    Sub Loguea()
+        Dim usu As String = txtUsuario.Text.Trim.ToUpper, pass As String = txtClave.Text.Trim
+        If comprobar(txtUsuario.Text.Trim) = False Or comprobar(txtClave.Text.Trim) = False Then
+            lblErrorLogin.Text = "El Usuario o la Contraseña son Incorrectos. Revise por favor."
+            lblErrorLogin.Visible = True
+            Exit Sub
+        End If
+        Dim da1 As New SqlDataAdapter("SELECT * FROM " & Session("QueEs") & " WHERE UPPER(LTRIM(RTRIM(usuario)))='" & usu & "' AND LTRIM(RTRIM(clave))='" & pass & "'", con)
+        Dim ds1 As New DataSet
+        da1.Fill(ds1, "Login")
+        If ds1.Tables("Login").Rows.Count = 0 Then
+            lblErrorLogin.Text = "El Usuario o la Contraseña son Incorrectos. Revise por favor."
+            lblErrorLogin.Visible = True
+            Exit Sub
+        End If
+        'Para Comprobar que Tipo de Usuario es y ver de donde tomamos los datos
+        Select Case Session("QueEs")
+            Case "Usuarios"
+                Session("idUsuario") = ds1.Tables("Login").Rows(0)("idUsuario")
+                Session("Usuario") = usu
+                Session("Password") = pass
+                Session("TipoDocumento") = ds1.Tables("Login").Rows(0)("tDoc")
+                Session("Documento") = ds1.Tables("Login").Rows(0)("Documento").ToString.Trim
+                Session("ApellidoYNombre") = ds1.Tables("Login").Rows(0)("Nombre").ToString.Trim & " " & ds1.Tables("Login").Rows(0)("Apellido").ToString.Trim
+                Session("Email") = ds1.Tables("Login").Rows(0)("Email").ToString.Trim
+                Session("idprov") = ds1.Tables("Login").Rows(0)("idProv").ToString.Trim
+                Session("Localidad") = ds1.Tables("Login").Rows(0)("Localidad").ToString.Trim
+                Session("Direccion") = ds1.Tables("Login").Rows(0)("Domicilio").ToString.Trim
+                Session("Telefono") = ds1.Tables("Login").Rows(0)("Telefono").ToString.Trim
+                lblBienvenidoAreaU.Text = "Bienvenido " & Session("ApellidoYNombre") & ", a tu Área de Usuario."
+                limpiarCamposRegistroU()
+                pnlLogin.Visible = False
+                pnlAreaUsuario.Visible = True
+            Case "Administradores"
+                'Session("idAdmin") = ds1.Tables("Login").Rows(0)("idAdmin")
+                'Session("Denominacion") = ds1.Tables("Login").Rows(0)("Administrador").ToString.Trim
+                'lblAdherente0.Text = "Bienvenido Administrador " & Session("Denominacion") & "."
+                'pnlLogin.Visible = False
+                'MostrarCuantosAEliminar()
+                'MostrarCuantosUsuariosHay()
+                'pnlAdministradores.Visible = True
+        End Select
+    End Sub
+#End Region
+    Protected Sub btnAhoraQueHago_Click(sender As Object, e As ImageClickEventArgs) Handles btnAhoraQueHago.Click
+        pnlAreaUsuario.Visible = False
+        pnlAhoraQueHago.Visible = True
+    End Sub
+#Region "Para Limpiar el Login"
+    Sub limpiarLogin()
+        lblErrorLogin.Text = ""
+        lblErrorLogin.Visible = False
+        txtUsuario.Text = ""
+        pnlRegistrarse.Visible = False
+    End Sub
+#End Region
+    Protected Sub btnVolverLoginU1_Click(sender As Object, e As ImageClickEventArgs) Handles btnVolverLoginU1.Click
+        limpiarLogin()
+        limpiarCamposRegistroU()
+        lblReenviarClave.Text = "" : lblReenviarClave.Visible = False
+        pnlLogin.Visible = True
+        pnlAreaUsuario.Visible = False
+        txtUsuario.Text = Session("Usuario")
+        txtClave.Text = Session("Password")
+    End Sub
+
+    Protected Sub btnVolverU2_Click(sender As Object, e As ImageClickEventArgs) Handles btnVolverU2.Click
+        pnlAhoraQueHago.Visible = False
+        pnlAreaUsuario.Visible = True
+    End Sub
+#Region "Mostrar Datos Personales"
+    Sub mostrarDatosPersonales()
+        txtEmailUedit.Text = Session("Email")
+        txtLocalidadUedit.Text = Session("Localidad")
+        txtDireccionUedit.Text = Session("Direccion")
+        ddlProvUedit.SelectedValue = Session("idprov")
+        txtTelefonoUedit.Text = Session("Telefono")
+        txtUsuarioUedit.Text = Session("Usuario")
+        txtClaveUedit.Text = Session("Password")
+    End Sub
+#End Region
+    Protected Sub btnModificarDatos_Click(sender As Object, e As ImageClickEventArgs) Handles btnModificarDatos.Click
+        mostrarDatosPersonales()
+        pnlAreaUsuario.Visible = False
+        pnlCambiarDatosPersonales.Visible = True
+    End Sub
+
+    Protected Sub btnCancelarVolverEdit_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarVolverEdit.Click
+        pnlAreaUsuario.Visible = True
+        pnlCambiarDatosPersonales.Visible = False
+    End Sub
+#Region "Modificar Datos Personales"
+    Sub editarDatosPersonales()
+        Dim ok As Boolean = True
+        'Llamamos a la Funcion para Limpiar los Errores
+        limpiarErroresModificarDatosU()
+        'Comprobamos el Email
+        arreglarCampo(txtEmailUedit)
+        If validateEmail(txtEmailUedit.Text) = False Then
+            ok = False
+            lblErrorEmailUedit.Text = "El Email no es válido."
+            lblErrorEmailUedit.Visible = True
+        End If
+        'Comprobamos La Localidad
+        txtLocalidadUedit.Text = txtLocalidadUedit.Text.Trim().ToUpper
+        If comprobar(txtLocalidadUedit.Text) = False Then
+            arreglarCampo(txtLocalidadUedit)
+            ok = False
+            lblErrorLocalidadUedit.Text = "La Localidad contenía caracteres inválidos, fueron quitados"
+            lblErrorLocalidadUedit.Visible = True
+        End If
+        'Comprobamos La Direccion
+        txtDireccionUedit.Text = txtDireccionUedit.Text.ToUpper
+        If comprobar(txtDireccionUedit.Text) = False Then
+            arreglarCampo(txtDireccionUedit)
+            ok = False
+            lblErrorDireccionUedit.Text = "La Direccion contenía caracteres inválidos, fueron quitados"
+            lblErrorDireccionUedit.Visible = True
+        End If
+        'Comprobamos el Telefono
+        txtTelefonoUedit.Text = txtTelefonoUedit.Text.Trim()
+        If comprobar(txtTelefonoUedit.Text) = False Or Not IsNumeric(txtTelefonoUedit.Text) Then
+            soloNumeros(txtTelefonoUedit)
+            ok = False
+            lblErrorTelefonoUedit.Text = "El Telefono no era válido, se ajustó a número "
+            lblErrorTelefonoUedit.Visible = True
+        End If
+        'Comprobamos el Usuario
+        txtUsuarioUedit.Text = txtUsuarioUedit.Text.Trim().ToUpper
+        If comprobar(txtUsuarioUedit.Text) = False Or txtUsuarioUedit.Text.IndexOf(" ") > -1 Then
+            txtUsuarioUedit.Text = txtUsuarioUedit.Text.Replace(" ", "")
+            arreglarCampo(txtUsuarioUedit)
+            ok = False
+            lblErrorUsuarioUedit.Text = "El Usuario contenía caracteres inválidos, fueron quitados."
+            lblErrorUsuarioUedit.Visible = True
+        End If
+        If txtUsuarioUedit.Text.Length < 5 Then
+            ok = False
+            lblErrorUsuarioUedit.Text = "El Usuario debe tener de 5 a 10 Caracteres, letras y/o Números."
+            lblErrorUsuarioUedit.Visible = True
+        End If
+        'Comprobamos la Contraseña
+        txtClaveUedit.Text = txtClaveUedit.Text.Trim()
+        If comprobar(txtClaveUedit.Text) = False Or txtClaveUedit.Text.IndexOf(" ") > -1 Then
+            txtClaveUedit.Text = txtClaveUedit.Text.Replace(" ", "")
+            arreglarCampo(txtClaveUedit)
+            ok = False
+            lblErrorClaveUedit.Text = "L a Contraseña contenía caracteres inválidos.Prueba con Letras y Números."
+            lblErrorClaveUedit.Visible = True
+        End If
+        If txtClaveUedit.Text.Length < 5 Then
+            ok = False
+            lblErrorClaveUedit.Text = "L a Contraseña debe tener de 5 a 10 Caracteres, letras y/o Números."
+            lblErrorClaveUedit.Visible = True
+        End If
+        'Si existen Errores los Mostramos el lblErroresU
+        If ok = False Then
+            lblErrorEdit.Text = "Surgieron Errores por favor Revisalos e Intenta de Nuevo."
+            lblErrorEdit.Visible = True
+            Exit Sub
+        End If
+        'Creamos las Distintas Sesiones
+        If txtUsuarioUedit.Text <> Session("Usuario") Then
+            Session("Usuario") = txtUsuarioUedit.Text
+            'Comprobamos si Existe en la DB
+            If YaExisteSql("SELECT idusuario FROM usuarios WHERE usuario='" & Session("Usuario") & "'") Then
+                ok = False
+                lblErrorUsuarioU.Text = "El usuario elegido ya existe. Prueba con otro."
+                lblErrorUsuarioU.Visible = True
+            End If
+        End If
+        Session("Password") = txtClaveUedit.Text
+        Session("Usuario") = txtUsuarioUedit.Text.ToLower
+        Session("Password") = txtClaveUedit.Text
+        Session("Email") = txtEmailUedit.Text.Trim
+        limpiarErroresModificarDatosU()
+        'Si pasa la Validacion lo Insertanos en la DB
+        If SqlAccion("UPDATE Usuarios SET Email='" & Session("Email") & "', idProv='" & ddlProvUedit.SelectedValue & "', Localidad = '" & txtLocalidadUedit.Text.Trim & "', Domicilio= '" & txtDireccionUedit.Text.Trim & "', Telefono='" & txtTelefonoUedit.Text.Trim & "', Usuario='" & Session("Usuario") & "', Clave='" & Session("Password") & "' WHERE idUsuario =" & Session("idUsuario")) = False Then
+            lblErroresU.Text = "Se ha producido un error al querer guardar tus datos."
+            lblErroresU.Visible = True
+            Exit Sub
+        End If
+        pnlCambiarDatosPersonales.Visible = False
+        pnlDatosModificadosOk.Visible = True
+        btnVolverAreaUsuario.Focus()
+    End Sub
+#End Region
+    Protected Sub btnCambiarDatos_Click(sender As Object, e As ImageClickEventArgs) Handles btnCambiarDatos.Click
+        editarDatosPersonales()
+    End Sub
+
+    Protected Sub btnVolverAreaUsuario_Click(sender As Object, e As ImageClickEventArgs) Handles btnVolverAreaUsuario.Click
+        pnlDatosModificadosOk.Visible = False
+        pnlAreaUsuario.Visible = True
+    End Sub
 End Class

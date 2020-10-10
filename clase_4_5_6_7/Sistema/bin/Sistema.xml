@@ -154,6 +154,15 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:Sistema._Default._lblReenviarClave">
+<summary>
+Control lblReenviarClave.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:Sistema._Default._btnVolverLogin">
 <summary>
 Control btnVolverLogin.
@@ -481,6 +490,276 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:Sistema._Default._btnRegistrarseVolverLoginU">
 <summary>
 Control btnRegistrarseVolverLoginU.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._pnlAreaUsuario">
+<summary>
+Control pnlAreaUsuario.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblBienvenidoAreaU">
+<summary>
+Control lblBienvenidoAreaU.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnAhoraQueHago">
+<summary>
+Control btnAhoraQueHago.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnHacerPedido">
+<summary>
+Control btnHacerPedido.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnVerHistorico">
+<summary>
+Control btnVerHistorico.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnModificarDatos">
+<summary>
+Control btnModificarDatos.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnVolverLoginU1">
+<summary>
+Control btnVolverLoginU1.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._pnlAhoraQueHago">
+<summary>
+Control pnlAhoraQueHago.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblTeCuento">
+<summary>
+Control lblTeCuento.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnVolverU2">
+<summary>
+Control btnVolverU2.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._pnlCambiarDatosPersonales">
+<summary>
+Control pnlCambiarDatosPersonales.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._txtEmailUedit">
+<summary>
+Control txtEmailUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorEmailUedit">
+<summary>
+Control lblErrorEmailUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._ddlProvUedit">
+<summary>
+Control ddlProvUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._txtLocalidadUedit">
+<summary>
+Control txtLocalidadUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorLocalidadUedit">
+<summary>
+Control lblErrorLocalidadUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._txtDireccionUedit">
+<summary>
+Control txtDireccionUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorDireccionUedit">
+<summary>
+Control lblErrorDireccionUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._txtTelefonoUedit">
+<summary>
+Control txtTelefonoUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorTelefonoUedit">
+<summary>
+Control lblErrorTelefonoUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._txtUsuarioUedit">
+<summary>
+Control txtUsuarioUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorUsuarioUedit">
+<summary>
+Control lblErrorUsuarioUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._txtClaveUedit">
+<summary>
+Control txtClaveUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorClaveUedit">
+<summary>
+Control lblErrorClaveUedit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorEdit">
+<summary>
+Control lblErrorEdit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnCambiarDatos">
+<summary>
+Control btnCambiarDatos.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnCancelarVolverEdit">
+<summary>
+Control btnCancelarVolverEdit.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._pnlDatosModificadosOk">
+<summary>
+Control pnlDatosModificadosOk.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblDatosModificadosOk">
+<summary>
+Control lblDatosModificadosOk.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnVolverAreaUsuario">
+<summary>
+Control btnVolverAreaUsuario.
 </summary>
 <remarks>
 Campo generado automáticamente.

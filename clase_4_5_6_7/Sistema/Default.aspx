@@ -67,6 +67,7 @@
                 <tr>
                     <td colspan="5" style="text-align:center">
                         <asp:ImageButton ID="btnReenviarClave" ImageUrl="~/imagenes/reenviarclave.png" runat="server" Visible="true" />
+                        <asp:Label ID="lblReenviarClave" Text="" runat="server"  Visible="false" Font-Bold="true" ForeColor="Blue"/>
                     </td>
                 </tr>
             </table>
@@ -328,6 +329,204 @@
                 <tr>
                     <td style="text-align:center">
                         <asp:ImageButton ID="btnRegistrarseVolverLoginU" ImageUrl="~/imagenes/todook.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <%--Panel Area Usuario--%>
+        <asp:Panel ID="pnlAreaUsuario" runat="server" BorderColor="#66CCFF" Height="535px" ForeColor="#372c57" Font-Size="Large" Visible="false">
+            <table style="width:100%">
+                <tr>
+                    <td style="text-align:center">
+                        <asp:Label ID="lblBienvenidoAreaU" Text="Bienvenido/a" runat="server" Font-Bold="true" Font-Size="Large" ForeColor="#000000" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center">
+                        <asp:ImageButton ID="btnAhoraQueHago" ImageUrl="~/imagenes/ahora_que_hago.png" runat="server" />
+                        <p>Desde acá vas a poder hacer varias cosas relacionadas con tu cuenta en ASP.NET</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center">
+                        <asp:ImageButton ID="btnHacerPedido" ImageUrl="~/imagenes/hacerpedido.png" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center">
+                        <asp:ImageButton ID="btnVerHistorico" ImageUrl="~/imagenes/vertodosmov.png" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center">
+                        <asp:ImageButton ID="btnModificarDatos" ImageUrl="~/imagenes/modificardatos.png" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center">
+                        <asp:ImageButton ID="btnVolverLoginU1" ImageUrl="~/imagenes/terminarvolver.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <%--Panel Ahora que Hago--%>
+        <asp:Panel ID="pnlAhoraQueHago" runat="server" BorderColor="#66CCFF" Height="535px" ForeColor="#372c57" Font-Size="Large" Visible="false">
+            <table style="width: 100%">
+                <tr>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblTeCuento" Text="Te Cuento un Poco" runat="server" Font-Bold="true" Font-Size="Large" ForeColor="#000000" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:justify">
+                        <p>Ya estás anotado en los cursos de ASP .NET!</p>
+                        <p></p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mi velit, congue ac quam sed, congue iaculis sapien. Pellentesque nunc augue, imperdiet ut metus eget, facilisis finibus sapien. Aenean lobortis ex sit amet massa rhoncus, congue tempor nibh fermentum. Phasellus at metus et libero blandit consectetur. Mauris sit amet eros ac lectus sollicitudin sollicitudin sit amet a risus. Sed eu pellentesque orci. In imperdiet mattis volutpat. Maecenas semper tortor eu nunc ultricies, ac eleifend enim varius. Duis porttitor facilisis metus, vel fringilla diam pretium nec. Nam molestie quam ut quam volutpat aliquet ut a ex. </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center">
+                        <asp:ImageButton ID="btnVolverU2" ImageUrl="~/imagenes/terminarvolver.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <%--Panel Ahora que Hago--%>
+        <asp:Panel ID="pnlCambiarDatosPersonales" runat="server" BorderColor="#66CCFF" Height="489px" ForeColor="#372c57" Font-Size="Large" Visible="false" BackImageUrl="~/imagenes/datospersonales.jpg">
+            <%--Tabla Datos para Registro--%>
+            <table style="width: 100%">
+                <%--Campos y Validacion Email.--%>
+                <tr>
+                    <td>Email Válido para Notificaciones:</td>
+                    <td>
+                        <asp:TextBox ID="txtEmailUedit" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="70" Width="262px" Rows="2" TextMode="MultiLine" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorEmailUedit" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Lista Desplegable para el Provincia--%>
+                <tr>
+                    <td>Provincia:</td>
+                    <td>
+                        <asp:DropDownList ID="ddlProvUedit" runat="server" Font-Bold="true" Font-Size="X-Large" ForeColor="White" BackColor="#382858" Width="276px">
+                            <asp:ListItem Value="1" Text="Buenos Aires" />
+                            <asp:ListItem Value="2" Text="Catamarca" />
+                            <asp:ListItem Value="3" Text="Chaco" />
+                            <asp:ListItem Value="4" Text="Chubut" />
+                            <asp:ListItem Value="5" Text="CABA" />
+                            <asp:ListItem Value="6" Text="Córdoba" />
+                            <asp:ListItem Value="7" Text="Corrientes" />
+                            <asp:ListItem Value="8" Text="Entre Ríos" />
+                            <asp:ListItem Value="9" Text="Formosa" />
+                            <asp:ListItem Value="10" Text="Jujuy" />
+                            <asp:ListItem Value="11" Text="La Pampa" />
+                            <asp:ListItem Value="12" Text="La Rioja" />
+                            <asp:ListItem Value="12" Text="La Rioja" />
+                            <asp:ListItem Value="13" Text="Mendoza" />
+                            <asp:ListItem Value="14" Text="Misiones" />
+                            <asp:ListItem Value="15" Text="Neuquén" />
+                            <asp:ListItem Value="16" Text="Río Negro" />
+                            <asp:ListItem Value="17" Text="Salta" />
+                            <asp:ListItem Value="18" Text="San Juan" />
+                            <asp:ListItem Value="19" Text="San Luis" />
+                            <asp:ListItem Value="20" Text="Santa Cruz" />
+                            <asp:ListItem Value="21" Text="Santa Fe" />
+                            <asp:ListItem Value="22" Text="Santiago del Estero" />
+                            <asp:ListItem Value="23" Text="Tucumán" />
+                            <asp:ListItem Value="24" Text="Tierra del Fuego" />
+                        </asp:DropDownList>
+                    </td>
+                    <td style="text-align: center"></td>
+                </tr>
+                <%--Campos y Validacion Localidad--%>
+                <tr>
+                    <td>Localidad:</td>
+                    <td>
+                        <asp:TextBox ID="txtLocalidadUedit" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="25" Width="262px" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorLocalidadUedit" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Campos y Validacion Direccion.--%>
+                <tr>
+                    <td>Dirección:</td>
+                    <td>
+                        <asp:TextBox ID="txtDireccionUedit" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="100" Width="262px" Rows="2" TextMode="MultiLine" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorDireccionUedit" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Campos y Validacion Telefono--%>
+                <tr>
+                    <td>Teléfono (agregue carateristica):</td>
+                    <td>
+                        <asp:TextBox ID="txtTelefonoUedit" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="25" Width="262px" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorTelefonoUedit" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Campos y Validacion Usuario--%>
+                <tr>
+                    <td>Usuario:</td>
+                    <td>
+                        <asp:TextBox ID="txtUsuarioUedit" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="10" Width="262px" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorUsuarioUedit" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Campos y Validacion Contraseña--%>
+                <tr>
+                    <td>Contraseña:</td>
+                    <td>
+                        <asp:TextBox ID="txtClaveUedit" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="10" Width="262px" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorClaveUedit" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Todos los Errores--%>
+                <tr>
+                    <td colspan="3" style="text-align: center">
+                        <asp:Label ID="lblErrorEdit" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+            </table>
+            <%--Tabla Botones --%>
+            <table style="width: 100%">
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="btnCambiarDatos" ImageUrl="~/imagenes/cambiarlosdatos.png" runat="server" />
+                    </td>
+                    <td>
+                        <asp:ImageButton ID="btnCancelarVolverEdit" ImageUrl="~/imagenes/cancelarvolver.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <asp:Panel ID="pnlDatosModificadosOk" runat="server" BorderColor="#66CCFF" Height="489px" ForeColor="#372c57" Font-Size="Large" Visible="false" BackImageUrl="~/imagenes/datospersonales.jpg">
+            <%--Tabla Botones --%>
+            <table style="width: 100%">
+                <tr style="text-align: center">
+                    <td>
+                    </td>
+                </tr>                
+                <tr style="text-align: center">
+                    <td></td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:Label ID="lblDatosModificadosOk" Text="Tus Datos han sido Modificados Correctamente" runat="server" Font-Bold="true" Font-Size="Large" ForeColor="#000000" />
+
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="btnVolverAreaUsuario" ImageUrl="~/imagenes/volveratuarea.png" runat="server" />
                     </td>
                 </tr>
             </table>
