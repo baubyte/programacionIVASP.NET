@@ -35,6 +35,31 @@ Public Class _Default
         pnlLoginMenu.Visible = False
         pnlPortada.Visible = True
     End Sub
+    Protected Sub btnRegistrarseU_Click(sender As Object, e As ImageClickEventArgs) Handles btnRegistrarseU.Click
+        registroUsuario()
+    End Sub
+
+    Protected Sub btnReenviarClave_Click(sender As Object, e As ImageClickEventArgs) Handles btnReenviarClave.Click
+
+    End Sub
+
+    Protected Sub btnIrLogin_Click(sender As Object, e As ImageClickEventArgs) Handles btnIrLogin.Click
+        pnlLoginMenu.Visible = False
+        pnlLogin.Visible = True
+    End Sub
+
+    Protected Sub btnCancelarVolverU_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarVolverU.Click
+        limpiarCamposRegistroU()
+        pnlLoginMenu.Visible = True
+        pnlRegistrarse.Visible = False
+    End Sub
+
+    Protected Sub btnRegistrarseVolverLoginU_Click(sender As Object, e As ImageClickEventArgs) Handles btnRegistrarseVolverLoginU.Click
+        pnlBienvenido.Visible = False
+        pnlLogin.Visible = True
+        txtUsuario.Text = Session("Usuario")
+        txtClave.Text = Session("Password")
+    End Sub
 #Region "Alta de Usuarios"
     Sub registroUsuario()
         Dim ok As Boolean = True
@@ -190,31 +215,6 @@ Public Class _Default
         btnRegistrarseVolverLoginU.Focus()
     End Sub
 #End Region
-    Protected Sub btnRegistrarseU_Click(sender As Object, e As ImageClickEventArgs) Handles btnRegistrarseU.Click
-        registroUsuario()
-    End Sub
-
-    Protected Sub btnReenviarClave_Click(sender As Object, e As ImageClickEventArgs) Handles btnReenviarClave.Click
-
-    End Sub
-
-    Protected Sub btnIrLogin_Click(sender As Object, e As ImageClickEventArgs) Handles btnIrLogin.Click
-        pnlLoginMenu.Visible = False
-        pnlLogin.Visible = True
-    End Sub
-
-    Protected Sub btnCancelarVolverU_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarVolverU.Click
-        limpiarCamposRegistroU()
-        pnlLoginMenu.Visible = True
-        pnlRegistrarse.Visible = False
-    End Sub
-
-    Protected Sub btnRegistrarseVolverLoginU_Click(sender As Object, e As ImageClickEventArgs) Handles btnRegistrarseVolverLoginU.Click
-        pnlBienvenido.Visible = False
-        pnlLogin.Visible = True
-        txtUsuario.Text = Session("Usuario")
-        txtClave.Text = Session("Password")
-    End Sub
 #Region "Limpiar Campos"
     'Funcion para limpiar los campos del Fomulario
     Sub arreglarCampo(ByRef campo As TextBox)
@@ -426,7 +426,6 @@ Public Class _Default
         Try
             If con.State = ConnectionState.Closed Then con.Open()
             If Sql_de_accion.ToUpper.IndexOf("INSERT") Then
-                'MsgBox(Sql_de_accion)
                 adapter.InsertCommand = New SqlCommand(Sql_de_accion, con)
                 adapter.InsertCommand.ExecuteNonQuery()
             Else
@@ -444,10 +443,10 @@ Public Class _Default
                 End If
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & Sql_de_accion)
             salida = False
         End Try
-        'con. Close()
+        con.Close()
         Return salida
     End Function
 #End Region
@@ -675,12 +674,13 @@ Public Class _Default
 #End Region
 #Region "Mostrar Botones Segun Tipo de Usuario"
     Sub mostrarBotonesUsuario()
-        btnHacerPedidoFabrica.Visible = False
-        btnHacerPedido.Visible = True
+        btnHacerPedidoFabrica.Visible = True
+        btnHacerPedido.Visible = False
         btnVerHistorico.Visible = True
         btnAbmProductos.Visible = False
     End Sub
     Sub mostrarBotonesAdmin()
+        btnHacerPedido.Visible = True
         btnHacerPedidoFabrica.Visible = True
         btnAbmProductos.Visible = True
         btnHacerPedido.Visible = False
@@ -704,6 +704,141 @@ Public Class _Default
         txtTelefonoUedit.Text = Session("Telefono")
         txtUsuarioUedit.Text = Session("Usuario")
         txtClaveUedit.Text = Session("Password")
+    End Sub
+#End Region
+#Region "Cargar Productos en DropDownList"
+    'Carga los productos en el ddlProducto
+    Sub cargarProductos()
+        'index para contar las candidad de registros para el FOR y datos para guardar los resultados
+        Dim index As Integer, datos As String
+        Dim consulta As String = "SELECT * FROM productos ORDER BY NombreProducto"
+        Dim dataAdapter As New SqlDataAdapter(consulta, con)
+        Dim dataSet As New DataSet
+        'Limpiamos los Items del ddl para no ir duplicando cada vez que llamamos a la funcion
+        ddlProducto.Items.Clear()
+        'Traemos los datos
+        dataAdapter.Fill(dataSet, "datos")
+        'Comprobamos si hay algo
+        If dataSet.Tables("datos").Rows.Count = 0 Then
+            ddlProducto.Items.Add("Lo Sentimos. No Hay Productos Disponibles")
+            Exit Sub
+        End If
+        For index = 0 To dataSet.Tables("datos").Rows.Count - 1
+            datos = dataSet.Tables("datos").Rows(index)("NombreProducto").ToString.Trim
+            'Agregamos un Item al ddlProducto
+            ddlProducto.Items.Add(datos)
+        Next
+        'Seleccionamos el Primer Item del ddlProducto
+        ddlProducto.SelectedIndex = 0
+        lblCosaAgregar.Text = ddlProducto.SelectedItem.ToString
+        lblQueEs.Text = "Equipos Informaticos"
+    End Sub
+#End Region
+#Region "Cargar Productos a la Grilla Temporal "
+    Sub cargarTemporal()
+        Dim idUser As Integer = Vnum(Session("idUsuario"))
+        'Seleccionamos todos los productos que tiene cargado el usuario en la tabla de pedidos temporal
+        Dim consulta As String = "SELECT Item, Cantidad FROM Pedidos_Temporal WHERE Num_Cli=" & idUser & " ORDER BY Item"
+        Dim dataAdapter As New SqlDataAdapter(consulta, con)
+        Dim dataSet As New DataSet
+        'Traemos los datos
+        dataAdapter.Fill(dataSet, "pedidos")
+        gwListaPedido.DataSource = dataSet.Tables("pedidos")
+        gwListaPedido.DataBind()
+        If dataSet.Tables("pedidos").Rows.Count = 0 Then
+            lblErrorHistorico.Text = ""
+            gwListaPedido.Visible = False
+            btnSolicitarPedido.Visible = False
+            btnQuitarTodos.Visible = False
+        Else
+            gwListaPedido.Visible = True
+            btnSolicitarPedido.Visible = True
+            btnQuitarTodos.Visible = True
+        End If
+
+    End Sub
+#End Region
+#Region "Borrar Temporal Usuario Logeado"
+    Public Function borrarPedidosTemporal() As Boolean
+        'Borramos el Teporal de los Pedidos del Usuario
+        Dim salida As Boolean = True
+        Dim consulta As String = "DELETE pedidos_temporal WHERE num_cli = " & Vnum(Session("idUsuario"))
+        If SqlAccion(consulta) = False Then
+            salida = False
+        End If
+        Return salida
+    End Function
+#End Region
+#Region "Acciones Boton Nuevo Pedido"
+    Sub nuevoPedidoBtnAccion()
+        Dim enter As String = "<br>"
+        Dim instrucciones As String
+        instrucciones = "<span>Instrucciones</span>" & enter & enter & "1) Elige el Producto a Solicitar a la Fabrica o Proveedor, los veras en Agregar:" & enter & "2) Indique la Cantidad deL Producto." & enter & "3) Oprima el Botón Agregar a la Lista. El Item elegido y la Cantidad se veran en la Lista Inferior. Si quieren sacar algún Item (quita por completo), solo deben seleccionar el Item en la lista para seleccionar y oprima el botón Quitar. Si agrega un Item que ya se encontraba en la lista se sumaran las cantidades." & enter & "4) Cuando Haya Terminado oprima el botón Enviar el Pedido. Todos los Items figuraran como Solicitado, y desde Revisar Estado de los Pedidos, podrá ver si cabiaron a Despachado o Enviado. Desde allí podrá anular los pedidos que aún esten Solicitado."
+        lblInstrucciones.Text = instrucciones
+        lblInstrucciones.Visible = False
+        btnInstrucciones.Text = "Abrir Instrucciones"
+        lblCosaAgregar.Text = ""
+        cargarProductos()
+        btnQuitarTodos.Visible = False
+        btnSolicitarPedido.Visible = False
+        lblErrorPedido.Text = ""
+        If IsNothing(Session("idUsuario")) Then
+            pnlLogin.Visible = True
+            Exit Sub
+        End If
+        borrarPedidosTemporal()
+        cargarTemporal()
+    End Sub
+#End Region
+#Region "Agregar Los Productos a la Lista de Pedidos Temporal"
+    Sub agregarListaPedidosTemporal()
+        Dim index As Integer = 0, c As String, numero As Integer = 0
+        Dim producto As String = lblCosaAgregar.Text.Trim
+        'Si no hay Productos Seleccionados salimos
+        If producto = "-----------" Then Exit Sub
+        'Obtenemos la Cantidad de los Productos
+        Dim cantidad As Integer = Vnum(ddlCantidad.SelectedValue.ToString)
+        'Si la cantidad es 0 salimos
+        If cantidad <= 0 Then Exit Sub
+        lblErrorPedido.Text = ""
+        'Comprobamos si el Item elegido ya esta en la lista
+        Dim consulta As String = "SELECT Cantidad FROM Pedidos_Temporal WHERE Num_Cli=" & Vnum(Session("idUsuario")) & "AND LTRIM(RTRIM(Item))='" & producto & "'"
+        Dim dataAdapter As New SqlDataAdapter(consulta, con)
+        Dim dataSet As New DataSet
+        dataAdapter.Fill(dataSet, "datos")
+        If dataSet.Tables("datos").Rows.Count > 0 Then
+            'Es decir que estaba en la lista
+            cantidad += Vnum(dataSet.Tables("datos").Rows(0)("Cantidad"))
+            Dim queryAddCantidad = "UPDATE Pedidos_Temporal SET Cantidad=" & cantidad & " WHERE Num_Cli=" & Vnum(Session("idUsuario")) & " AND LTRIM(RTRIM(Item))='" & producto & "'"
+            If SqlAccion(queryAddCantidad) = False Then
+                lblErrorPedido.Text = "No se Pudo Modificar el Item Elegido. Intente más Tarde."
+                Exit Sub
+            End If
+        Else
+            Dim queryAddItem = "INSERT INTO Pedidos_Temporal (Num_Cli, Item, Cantidad) VALUES (" & Vnum(Session("idUsuario")) & ", '" & producto & "' ," & cantidad & ")"
+            If SqlAccion(queryAddItem) = False Then
+                lblErrorPedido.Text = "No se Pudo Agregar el Item Elegido a la Lista. Intente más Tarde."
+                Exit Sub
+            End If
+        End If
+        ddlCantidad.SelectedIndex = 0
+        cargarTemporal()
+    End Sub
+#End Region
+#Region "Eliminar Item de la Lista de Pedidos_Temporal"
+    Sub quitarItem(ByVal e As GridViewCommandEventArgs)
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Dim row As GridViewRow = gwListaPedido.Rows(index)
+        Dim item As String = row.Cells(1).Text, enter As String = Chr(13) & Chr(10)
+        Dim consulta As String = "DELETE Pedidos_Temporal WHERE LTRIM(RTRIM(iTEM)) ='" & item & "' AND Num_Cli =" & Vnum(Session("idUsuario"))
+        lblErrorPedido.Text = ""
+        If (e.CommandName = "Quitar") Then
+            If SqlAccion(consulta) = False Then
+                lblErrorPedido.Text = "No se Pudo Quitar el Item de la Lista. Intente más Tarde."
+                Exit Sub
+            End If
+            cargarTemporal()
+        End If
     End Sub
 #End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
@@ -759,10 +894,10 @@ Public Class _Default
     End Sub
 
     Protected Sub btnNuevoPedido_Click(sender As Object, e As ImageClickEventArgs) Handles btnNuevoPedido.Click
+        nuevoPedidoBtnAccion()
         pnlNuevoPedidoFabrica.Visible = True
         pnlPedidosFabrica.Visible = False
     End Sub
-
     Protected Sub ImageButton3_Click(sender As Object, e As ImageClickEventArgs) Handles btnTerminarPedidoCreado.Click
         pnlPedidoCreado.Visible = False
         pnlPedidosFabrica.Visible = True
@@ -779,6 +914,8 @@ Public Class _Default
     End Sub
 
     Protected Sub btnCancelarPedido_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarPedido.Click
+        If borrarPedidosTemporal() = False Then
+        End If
         pnlNuevoPedidoFabrica.Visible = False
         pnlPedidosFabrica.Visible = True
     End Sub
@@ -791,5 +928,35 @@ Public Class _Default
     Protected Sub btnEntrarAdmin_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrarAdmin.Click
         Session("QueEs") = "Administradores"
         Loguea()
+    End Sub
+
+    Protected Sub btnInstrucciones_Click(sender As Object, e As EventArgs) Handles btnInstrucciones.Click
+        If btnInstrucciones.Text = "Abrir Instrucciones" Then
+            btnInstrucciones.Text = "Cerrar Instrucciones"
+            lblInstrucciones.Visible = True
+        Else
+            btnInstrucciones.Text = "Abrir Instrucciones"
+            lblInstrucciones.Visible = False
+        End If
+    End Sub
+
+    Protected Sub ddlProducto_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlProducto.SelectedIndexChanged
+        lblCosaAgregar.Text = ddlProducto.SelectedItem.ToString
+        lblQueEs.Text = "Equipos Informaticos"
+    End Sub
+
+    Protected Sub btnAgregarAlista_Click(sender As Object, e As ImageClickEventArgs) Handles btnAgregarAlista.Click
+        agregarListaPedidosTemporal()
+    End Sub
+    Protected Sub gwListaPedido_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gwListaPedido.RowCommand
+        quitarItem(e)
+    End Sub
+
+    Protected Sub btnQuitarTodos_Click(sender As Object, e As ImageClickEventArgs) Handles btnQuitarTodos.Click
+        If borrarPedidosTemporal() = False Then
+            lblErrorPedido.Text = "No se Pudo Quitar a Todos los Items de la Lista. Intente más Tarde."
+            Exit Sub
+        End If
+        cargarTemporal()
     End Sub
 End Class

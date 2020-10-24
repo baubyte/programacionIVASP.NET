@@ -17,6 +17,24 @@
         #body{
             background: #ffffff;
         }
+        .auto-style1 {
+            width: 70%;
+        }
+        .auto-style3 {
+            width: 39%;
+        }
+        .auto-style4 {
+            width: 39%;
+            height: 43px;
+        }
+        .auto-style5 {
+            width: 70%;
+            height: 43px;
+        }
+        .auto-style6 {
+            width: 40%;
+            height: 43px;
+        }
         </style>
 </head>
 <body>
@@ -586,64 +604,49 @@
             </table>
         </asp:Panel>
         <%--Panel Nuevo Pedido Fabrica--%>
-        <asp:Panel ID="pnlNuevoPedidoFabrica" runat="server" BorderColor="#66CCFF" Height="720px" ForeColor="#372c57" Font-Size="Large" Visible="false" BackImageUrl="~/imagenes/fondo.jpg">
+        <asp:Panel ID="pnlNuevoPedidoFabrica" runat="server" BorderColor="#66CCFF" ForeColor="#372c57" Font-Size="Large" Visible="false" BackColor="#94bbd4">
             <%--Tabla Botones --%>
             <table style="width: 100%">
                 <tr style="text-align: left">
-                    <td colspan="5">
-                        <h1>Nuevo de Pedido a Fábrica</h1>
+                    <td colspan="4">
+                        <h1>Nuevo de Pedido a Fábrica o Proveedor</h1>
                     </td>
                 </tr>                
                 <tr>
-                    <td>
-                        <asp:Button ID="btnInstrucciones" runat="server" Text="Abrir Instrucciones" Visible="False" />
+                    <td class="auto-style3">
+                        <asp:Button ID="btnInstrucciones" runat="server" />
                     </td>
-                    <td>
+                    <td class="auto-style1" colspan="3">
                         <asp:Label ID="lblInstrucciones" runat="server"></asp:Label>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
                 </tr>
                 <tr>
-                    <td colspan="5">Seleccione el Gusto del Helado</td>
+                    <td colspan="4">Seleccione el Producto</td>
                 </tr>
                 <tr>
-                    <td colspan="5">
-                        <asp:DropDownList ID="ddlHelados" runat="server" Font-Bold="true" Font-Size="X-Large" ForeColor="White" BackColor="Black" Width="85%">
+                    <td colspan="4">
+                        <asp:DropDownList ID="ddlProducto" runat="server" Font-Bold="true" Font-Size="X-Large" ForeColor="White" BackColor="Black" Width="85%" AutoPostBack="True">
                             <asp:ListItem Value="0" Text="Sin Enlazar" />
                         </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5">Seleccione Material (Envases, Bolsas, etc.)</td>
-                </tr>
-                <tr>
-                    <td colspan="5">
-                        <asp:DropDownList ID="ddlMateriales" runat="server" Font-Bold="true" Font-Size="X-Large" ForeColor="White" BackColor="Black" Width="85%">
-                            <asp:ListItem Value="0" Text="Sin Enlazar" />
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    <td class="auto-style3">
                         Agregar: 
                     </td>
-                    <td></td>
-                    <td>
-                        <asp:Label ID="lblCosaAgregar" Text="" runat="server" Font-Bold="true" Font-Size="Large" ForeColor="Black"/>
+                    <td colspan="2">
+                      <asp:Label ID="lblCosaAgregar" Text="" runat="server" Font-Bold="true" Font-Size="Large" ForeColor="Black"/>
                     </td>
                     <td>
                         <asp:Label ID="lblQueEs" Text="" runat="server" />
                     </td>
-                    <td></td>
                 </tr>
                 <tr>
-                    <td>
-                        Cantidad de Latas o Unidades:
+                    <td class="auto-style4">
+                        Cantidad:
                     </td>
-                    <td>
-                        <asp:DropDownList ID="ddlCantLatas" runat="server" Font-Bold="true" Font-Size="X-Large" ForeColor="White" BackColor="Black" Width="85%">
+                    <td class="auto-style5">
+                        <asp:DropDownList ID="ddlCantidad" runat="server" Font-Bold="true" Font-Size="X-Large" ForeColor="White" BackColor="Black" Width="30%">
                             <asp:ListItem Value="1" Text="1" />
                             <asp:ListItem Value="2" Text="2" />
                             <asp:ListItem Value="3" Text="3" />
@@ -658,22 +661,25 @@
                             <asp:ListItem Value="12" Text="12" />
                         </asp:DropDownList>
                     </td>
-                    <td colspan="3" style="text-align: center">
+                    <td colspan="2" style="text-align: center; " class="auto-style6">
                         <asp:ImageButton ID="btnAgregarAlista" ImageUrl="~/imagenes/agregar.png" runat="server" />
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5">Esta es la Lista de su Pedido.</td>
+                    <td colspan="4">Esta es la Lista de su Pedido.</td>
                 </tr>
                 <tr style="text-align: center">
-                    <td colspan="5">
+                    <td colspan="4">
                         <asp:GridView ID="gwListaPedido" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" Width="100%">
                             <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
-                                <asp:ButtonField ButtonType="Image" CommandName="Quitar" ImageUrl="~/imagenes/quitar.png" Text="Quitar" />
-                                <asp:BoundField DataField="item" HeaderText="Item Solicitado" />
-                                <asp:BoundField DataField="Ttipo" HeaderText="Tipo" />
-                                <asp:BoundField DataField="cantidad" HeaderText="Cant." />
+                                <asp:ButtonField ButtonType="Image" CommandName="Quitar" ImageUrl="~/imagenes/quitar.png" Text="Quitar" >
+                                <HeaderStyle Width="15%" />
+                                </asp:ButtonField>
+                                <asp:BoundField DataField="Item" HeaderText="Item Solicitado" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Cant." >
+                                <HeaderStyle Width="15%" />
+                                </asp:BoundField>
                             </Columns>
                             <FooterStyle BackColor="#CCCCCC" />
                             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -687,14 +693,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="auto-style3">
                          <asp:ImageButton ID="btnQuitarTodos" ImageUrl="~/imagenes/quitartodos.png" runat="server" />
                     </td>
                     <td colspan="2">
                         <asp:ImageButton ID="btnSolicitarPedido" ImageUrl="~/imagenes/solicitar.png" runat="server" />
                     </td>
-                    <td colspan="2">
+                    <td>
                         <asp:ImageButton ID="btnCancelarPedido" ImageUrl="~/imagenes/cancelarpedido.png" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align:center">
+                        <asp:Label ID="lblErrorPedido" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
                     </td>
                 </tr>
             </table>

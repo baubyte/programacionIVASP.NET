@@ -842,22 +842,13 @@ Partial Public Class _Default
     Protected WithEvents lblInstrucciones As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control ddlHelados.
+    '''Control ddlProducto.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ddlHelados As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control ddlMateriales.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ddlMateriales As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ddlProducto As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control lblCosaAgregar.
@@ -878,13 +869,13 @@ Partial Public Class _Default
     Protected WithEvents lblQueEs As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control ddlCantLatas.
+    '''Control ddlCantidad.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ddlCantLatas As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ddlCantidad As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control btnAgregarAlista.
@@ -930,6 +921,15 @@ Partial Public Class _Default
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnCancelarPedido As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control lblErrorPedido.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorPedido As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control pnlPedidoCreado.

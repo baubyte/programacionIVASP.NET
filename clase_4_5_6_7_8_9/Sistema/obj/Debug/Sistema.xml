@@ -865,18 +865,9 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
-<member name="F:Sistema._Default._ddlHelados">
+<member name="F:Sistema._Default._ddlProducto">
 <summary>
-Control ddlHelados.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:Sistema._Default._ddlMateriales">
-<summary>
-Control ddlMateriales.
+Control ddlProducto.
 </summary>
 <remarks>
 Campo generado automáticamente.
@@ -901,9 +892,9 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
-<member name="F:Sistema._Default._ddlCantLatas">
+<member name="F:Sistema._Default._ddlCantidad">
 <summary>
-Control ddlCantLatas.
+Control ddlCantidad.
 </summary>
 <remarks>
 Campo generado automáticamente.
@@ -949,6 +940,15 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:Sistema._Default._btnCancelarPedido">
 <summary>
 Control btnCancelarPedido.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorPedido">
+<summary>
+Control lblErrorPedido.
 </summary>
 <remarks>
 Campo generado automáticamente.
