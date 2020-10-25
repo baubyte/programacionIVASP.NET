@@ -959,15 +959,6 @@ Partial Public Class _Default
     Protected WithEvents btnTerminarVolverCreado As Global.System.Web.UI.WebControls.ImageButton
 
     '''<summary>
-    '''Control btnTerminarPedidoCreado.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnTerminarPedidoCreado As Global.System.Web.UI.WebControls.ImageButton
-
-    '''<summary>
     '''Control pnlHistorico.
     '''</summary>
     '''<remarks>
@@ -1056,4 +1047,238 @@ Partial Public Class _Default
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnTerminarVerUnPedido As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control pnlAbmProductos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlAbmProductos As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control btnNuevoProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnNuevoProducto As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control btnTodosLosProductos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnTodosLosProductos As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control bntTerminarMenuProductos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents bntTerminarMenuProductos As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control pnlAltaProductos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlAltaProductos As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control txtCodigoProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtCodigoProducto As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorCodProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorCodProducto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtNombreProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtNombreProducto As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorNomPro.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorNomPro As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtMarca.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtMarca As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorMarca.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorMarca As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtDescripcion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtDescripcion As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorDescripcion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorDescripcion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtPrecio.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtPrecio As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorPrecio.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorPrecio As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtStock.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtStock As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorStock.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorStock As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control ddlCategoria.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlCategoria As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control lblErrorCategoria.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorCategoria As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control ddlEstado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlEstado As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control lblErroresProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErroresProducto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control btnAgregarProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnAgregarProducto As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control btnCancelarAgregarProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCancelarAgregarProducto As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control pnlProductoCreado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlProductoCreado As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control lblProductoCreado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblProductoCreado As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control btnVolverAltaProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnVolverAltaProducto As Global.System.Web.UI.WebControls.ImageButton
 End Class

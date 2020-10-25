@@ -841,6 +841,124 @@ Public Class _Default
         End If
     End Sub
 #End Region
+#Region "Limpiar Errores Alta Producto"
+
+    'Funcion para Limpiar y Oculatar el Label que Muestra los Errores de Cada Campo 
+    Sub limpiarErroresAltaProducto()
+        'Dejamos Vacios todos los campos
+        lblErrorCodProducto.Text = ""
+        lblErrorNomPro.Text = ""
+        lblErrorMarca.Text = ""
+        lblErrorDescripcion.Text = ""
+        lblErrorPrecio.Text = ""
+        lblErrorStock.Text = ""
+        lblErrorCategoria.Text = ""
+        lblErroresProducto.Text = ""
+        'Ocultamos los Labels de los Errores
+        lblErrorCodProducto.Visible = False
+        lblErrorNomPro.Visible = False
+        lblErrorMarca.Visible = False
+        lblErrorDescripcion.Visible = False
+        lblErrorPrecio.Visible = False
+        lblErrorStock.Visible = False
+        lblErrorCategoria.Visible = False
+        lblErroresProducto.Visible = False
+    End Sub
+#End Region
+#Region "Limpiar Campos Productos"
+    Sub limpiarCamposAltaProducto()
+        'Llamamos a la Funcion para Limpiar los Errores
+        limpiarErroresAltaProducto()
+        txtCodigoProducto.Text = ""
+        txtNombreProducto.Text = ""
+        txtMarca.Text = ""
+        txtDescripcion.Text = ""
+        txtPrecio.Text = ""
+        txtStock.Text = ""
+        ddlCategoria.SelectedIndex = 0
+        ddlEstado.SelectedIndex = 0
+    End Sub
+#End Region
+#Region "Alta Producto"
+    Sub altaProducto()
+        Dim ok As Boolean = True
+        'Llamamos a la Funcion para Limpiar los Errores
+        limpiarErroresAltaProducto()
+        'Comprobamos el Nombre
+        txtCodigoProducto.Text = txtCodigoProducto.Text.Trim().ToUpper
+        If comprobar(txtCodigoProducto.Text) = False Then
+            arreglarCampo(txtCodigoProducto)
+            ok = False
+            lblErrorNomPro.Text = "El Código contenía caracteres inválidos, fueron quitados"
+            lblErrorNomPro.Visible = True
+        End If
+        'Comprobamos el Nombre
+        txtNombreProducto.Text = txtNombreProducto.Text.Trim().ToUpper
+        If comprobar(txtNombreProducto.Text) = False Then
+            arreglarCampo(txtNombreProducto)
+            ok = False
+            lblErrorNomPro.Text = "El Nombre contenía caracteres inválidos, fueron quitados"
+            lblErrorNomPro.Visible = True
+        End If
+        'Comprobamos Marca
+        txtMarca.Text = txtMarca.Text.Trim().ToUpper
+        If comprobar(txtMarca.Text) = False Then
+            arreglarCampo(txtMarca)
+            ok = False
+            lblErrorMarca.Text = "La Marca contenía caracteres inválidos, fueron quitados"
+            lblErrorMarca.Visible = True
+        End If
+        'Comprobamos la Descripcion
+        txtDescripcion.Text = txtDescripcion.Text.Trim().ToUpper
+        If comprobar(txtDescripcion.Text) = False Then
+            arreglarCampo(txtDescripcion)
+            ok = False
+            lblErrorDescripcion.Text = "La Descripción contenía caracteres inválidos, fueron quitados"
+            lblErrorDescripcion.Visible = True
+        End If
+        'Comprobamos el Precio
+        txtPrecio.Text = txtPrecio.Text.Trim()
+        If comprobar(txtPrecio.Text) = False Or Not IsNumeric(txtPrecio.Text) Then
+            soloNumeros(txtPrecio)
+            ok = False
+            lblErrorPrecio.Text = "El Documento no era válido, se ajustó a número "
+            lblErrorPrecio.Visible = True
+        End If
+        If ddlCantidad.SelectedValue = "Seleccionar" Then
+            ok = False
+            lblErrorCategoria.Text = "Debe Seleccionar una Categoria para el Producto."
+            lblErrorCategoria.Visible = True
+        End If
+        'Si existen Errores los Mostramos el lblErroresProducto
+        If ok = False Then
+            lblErroresProducto.Text = "Surgieron Errores por favor Revisalos e Intenta de Nuevo."
+            lblErroresProducto.Visible = True
+            Exit Sub
+        End If
+        'Comprobamos si Existe en la DB
+        If YaExisteSql("SELECT CodigoProducto FROM Productos WHERE CodigoProducto='" & txtCodigoProducto.Text.Trim & "'") Then
+            ok = False
+            lblErrorCodProducto.Text = "El Código Ingresado ya existe."
+            lblErrorCodProducto.Visible = True
+        End If
+        If ok = False Then
+            lblErroresProducto.Text = "El Código de Producto No se Puede Repetir."
+            lblErroresProducto.Visible = True
+            Exit Sub
+        End If
+        'Si pasa la Validacion lo Insertanos en la DB
+        Dim consulta = "INSERT INTO Productos (CodigoProducto, NombreProducto, MarcaProducto , DescripcionProducto, PrecioProducto, StockProducto, CategoriaProducto, Estado) VALUES ('" & txtCodigoProducto.Text.Trim & "', '" & txtNombreProducto.Text.Trim & "', '" & txtMarca.Text.Trim & "', '" & txtDescripcion.Text.Trim & "', " & NumSql(txtPrecio.Text.Trim) & ", " & NumSql(txtStock.Text.Trim) & ", '" & ddlCantidad.SelectedValue & "', " & ddlEstado.SelectedValue & ")"
+        If SqlAccion(consulta) = False Then
+            lblErroresProducto.Text = "Se ha producido un error al querer guardar tus datos."
+            lblErroresProducto.Visible = True
+            Exit Sub
+        End If
+        limpiarCamposAltaProducto()
+        pnlAltaProductos.Visible = False
+        pnlProductoCreado.Visible = True
+        btnVolverAltaProducto.Focus()
+    End Sub
+#End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()
@@ -898,10 +1016,6 @@ Public Class _Default
         pnlNuevoPedidoFabrica.Visible = True
         pnlPedidosFabrica.Visible = False
     End Sub
-    Protected Sub ImageButton3_Click(sender As Object, e As ImageClickEventArgs) Handles btnTerminarPedidoCreado.Click
-        pnlPedidoCreado.Visible = False
-        pnlPedidosFabrica.Visible = True
-    End Sub
 
     Protected Sub btnTerminarHistorico_Click(sender As Object, e As ImageClickEventArgs) Handles btnTerminarHistorico.Click
         pnlHistorico.Visible = False
@@ -958,5 +1072,40 @@ Public Class _Default
             Exit Sub
         End If
         cargarTemporal()
+    End Sub
+
+    Protected Sub btnNuevoProducto_Click(sender As Object, e As ImageClickEventArgs) Handles btnNuevoProducto.Click
+        pnlAbmProductos.Visible = False
+        pnlAltaProductos.Visible = True
+    End Sub
+
+    Protected Sub bntTerminarMenuProductos_Click(sender As Object, e As ImageClickEventArgs) Handles bntTerminarMenuProductos.Click
+        pnlAbmProductos.Visible = False
+        pnlAreaUsuario.Visible = True
+    End Sub
+
+    Protected Sub btnCancelarAgregarProducto_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarAgregarProducto.Click
+        limpiarCamposAltaProducto()
+        limpiarErroresAltaProducto()
+        pnlAltaProductos.Visible = False
+        pnlAbmProductos.Visible = True
+    End Sub
+
+    Protected Sub btnAbmProductos_Click(sender As Object, e As ImageClickEventArgs) Handles btnAbmProductos.Click
+        pnlAreaUsuario.Visible = False
+        pnlAbmProductos.Visible = True
+    End Sub
+    Protected Sub btnTerminarVolverCreado_Click(sender As Object, e As ImageClickEventArgs) Handles btnTerminarVolverCreado.Click
+        pnlPedidoCreado.Visible = False
+        pnlPedidosFabrica.Visible = True
+    End Sub
+
+    Protected Sub btnVolverAltaProducto_Click(sender As Object, e As ImageClickEventArgs) Handles btnVolverAltaProducto.Click
+        pnlProductoCreado.Visible = False
+        pnlAltaProductos.Visible = True
+    End Sub
+
+    Protected Sub btnAgregarProducto_Click(sender As Object, e As ImageClickEventArgs) Handles btnAgregarProducto.Click
+        altaProducto()
     End Sub
 End Class

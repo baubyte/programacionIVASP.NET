@@ -731,17 +731,6 @@
                         <asp:ImageButton ID="btnTerminarVolverCreado" ImageUrl="~/imagenes/terminar.png" runat="server" />
                     </td>
                 </tr>
-                <tr style="text-align: center">
-                    <td></td>
-                </tr>
-                <tr style="text-align: center">
-                    <td></td>
-                </tr>
-                <tr style="text-align: center">
-                    <td>
-                        <asp:ImageButton ID="btnTerminarPedidoCreado" ImageUrl="~/imagenes/terminar.png" runat="server" />
-                    </td>
-                </tr>
             </table>
         </asp:Panel>
         <%--Panel Pedido Creado--%>
@@ -832,6 +821,196 @@
                 <tr style="text-align: center">
                     <td style="text-align: center">
                         <asp:ImageButton ID="btnTerminarVerUnPedido" ImageUrl="~/imagenes/terminarvolver.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <%--Panel Abm Productos--%>
+        <asp:Panel ID="pnlAbmProductos" runat="server" BorderColor="#66CCFF" Height="489px" ForeColor="#372c57" Font-Size="Large" Visible="false" BackImageUrl="~/imagenes/fondo.jpg">
+            <%--Tabla Botones --%>
+            <table style="width: 100%">
+                <tr style="text-align: center">
+                    <td>
+                        <h1>Menu ABM Productos</h1>
+                    </td>
+                </tr>                
+                <tr style="text-align: center">
+                    <td>
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="btnNuevoProducto" ImageUrl="~/imagenes/nuevoproducto.png" runat="server" />
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="btnTodosLosProductos" ImageUrl="~/imagenes/todoslosproductos.png" runat="server" />
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td></td>
+                </tr>
+                <tr style="text-align: center">
+                    <td></td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="bntTerminarMenuProductos" ImageUrl="~/imagenes/terminar.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+    <%--Panel de Alta de Productos --%>
+        <asp:Panel ID="pnlAltaProductos" runat="server" ForeColor="#372C57" Font-Size="Large" Visible="false" BackImageUrl="~/imagenes/fondo.jpg">
+            <%--Tabla Titulos de Registro e Informacion--%>
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        <asp:Image ImageUrl="~/imagenes/header.png" runat="server" Width="763px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <h2>
+                        Bienvenido al Alta de Productos
+                        </h2>
+                    </td>
+                </tr>
+            </table>
+            <%--Tabla Datos para Alta--%>
+            <table style="width: 100%">
+                <%--Campos y Validacion Codigo Producto--%>
+                <tr>
+                    <td>Código del Producto:</td>
+                    <td>
+                        <asp:TextBox ID="txtCodigoProducto" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="20" Width="262px" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorCodProducto" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Campos y Validacion Nombre--%>
+                <tr>
+                    <td>Nombre del Producto:</td>
+                    <td>
+                        <asp:TextBox ID="txtNombreProducto" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="20" Width="262px" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorNomPro" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Campos y Validacion Marca--%>
+                <tr>
+                    <td>Marca:</td>
+                    <td>
+                        <asp:TextBox ID="txtMarca" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="20" Width="262px" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorMarca" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Campos y Validacion Descripcion.--%>
+                <tr>
+                    <td>Descripción:</td>
+                    <td>
+                        <asp:TextBox ID="txtDescripcion" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="100" Width="262px" Rows="2" TextMode="MultiLine" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorDescripcion" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Campos y Validacion Precio--%>
+                <tr>
+                    <td>Precio $:</td>
+                    <td>
+                        <asp:TextBox ID="txtPrecio" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="6" Width="150px" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorPrecio" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Campos y Validacion Stock--%>
+                <tr>
+                    <td>Stock:</td>
+                    <td>
+                        <asp:TextBox ID="txtStock" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="6" Width="150px" />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorStock" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Lista Desplegable para las Categorias--%>
+                <tr>
+                    <td>Categoria:</td>
+                    <td>
+                        <asp:DropDownList ID="ddlCategoria" runat="server" Font-Bold="true" Font-Size="X-Large" ForeColor="White" BackColor="#382858" Width="276px">
+                            <asp:ListItem Value="Seleccionar" Text="Seleccionar" />
+                            <asp:ListItem Value="Mothers y Micros" Text="Mothers y Micros" />
+                            <asp:ListItem Value="Almacenamietnto" Text="Almacenamietnto" />
+                            <asp:ListItem Value="Placas" Text="Placas" />
+                            <asp:ListItem Value="Gabinetes y Coolers" Text="Gabinetes y Coolers" />
+                            <asp:ListItem Value="Fuentes" Text="Fuentes" />
+                            <asp:ListItem Value="Accesorios y Perifericos" Text="Accesorios y Perifericos" />
+                            <asp:ListItem Value="Otros" Text="Otros" />
+                        </asp:DropDownList>
+                    </td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorCategoria" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <%--Lista Desplegable para el Estado del Producto--%>
+                <tr>
+                    <td>Categoria:</td>
+                    <td>
+                        <asp:DropDownList ID="ddlEstado" runat="server" Font-Bold="true" Font-Size="X-Large" ForeColor="White" BackColor="#382858" Width="276px">
+                            <asp:ListItem Value="0" Text="Activo" />
+                            <asp:ListItem Value="1" Text="Inactivo" />
+                        </asp:DropDownList>
+                    </td>
+                    <td style="text-align: center"></td>
+                </tr>
+                <%--Todos los Errores--%>
+                <tr>
+                    <td colspan="3" style="text-align: center">
+                        <asp:Label ID="lblErroresProducto" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+            </table>
+            <%--Tabla Botones --%>
+            <table style="width: 100%">
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="btnAgregarProducto" ImageUrl="~/imagenes/agregar.png" runat="server" />
+                    </td>
+                    <td>
+                        <asp:ImageButton ID="btnCancelarAgregarProducto" ImageUrl="~/imagenes/cancelarpedido.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <%--Panel Producto Creado--%>
+        <asp:Panel ID="pnlProductoCreado" runat="server" BorderColor="#66CCFF" Height="389px" ForeColor="#372c57" Font-Size="Large" Visible="false" BackImageUrl="~/imagenes/fondo.jpg">
+            <%--Tabla Botones --%>
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                    </td>
+                </tr>                
+                <tr style="text-align: center">
+                    <td></td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:Label ID="lblProductoCreado" Text="El Producto Fue dado de Alta Correctament." runat="server" Font-Bold="true" Font-Size="Large"/>
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="btnVolverAltaProducto" ImageUrl="~/imagenes/terminar.png" runat="server" />
                     </td>
                 </tr>
             </table>

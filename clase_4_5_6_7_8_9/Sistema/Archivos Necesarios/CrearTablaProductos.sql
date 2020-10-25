@@ -1,6 +1,7 @@
 CREATE TABLE [dbo].[Productos]
 (
     [idProducto] [int] IDENTITY(1,1) NOT NULL,
+    [CodigoProducto] [nvarchar](30) NULL,
 	[NombreProducto] [nvarchar](30) NULL,
     [MarcaProducto] [nvarchar](30) NOT NULL,
     [DescripcionProducto] [nvarchar](200) NULL default '',
