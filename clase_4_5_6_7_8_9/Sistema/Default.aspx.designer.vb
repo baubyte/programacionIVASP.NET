@@ -1281,4 +1281,238 @@ Partial Public Class _Default
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnVolverAltaProducto As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control pnlListadoProductos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlListadoProductos As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control lblErrorListadoProductos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorListadoProductos As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control gvListadoProductos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvListadoProductos As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control btnActulizarListadoProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnActulizarListadoProducto As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control btnVolverAbmProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnVolverAbmProducto As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control pnlEditarProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlEditarProducto As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control lblCodigoProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCodigoProducto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtNombreProductoEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtNombreProductoEdit As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorNombreProductoEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorNombreProductoEdit As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtMarcaEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtMarcaEdit As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorMarcaEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorMarcaEdit As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtDescripcionEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtDescripcionEdit As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorDescripcionEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorDescripcionEdit As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtPrecioEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtPrecioEdit As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorPrecioEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorPrecioEdit As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtStockEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtStockEdit As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorStockEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorStockEdit As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control ddlCategoriaEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlCategoriaEdit As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control lblErrorCategoriaEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorCategoriaEdit As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control ddlEstadoEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlEstadoEdit As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control lblErroresProductoEdit.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErroresProductoEdit As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control btnEditarProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnEditarProducto As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control btnCancelarEditarProducto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCancelarEditarProducto As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control pnlProductoEditado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlProductoEditado As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control lblProductoEditado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblProductoEditado As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control btnVolverListado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnVolverListado As Global.System.Web.UI.WebControls.ImageButton
 End Class

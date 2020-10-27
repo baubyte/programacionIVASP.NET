@@ -921,10 +921,18 @@ Public Class _Default
         If comprobar(txtPrecio.Text) = False Or Not IsNumeric(txtPrecio.Text) Then
             soloNumeros(txtPrecio)
             ok = False
-            lblErrorPrecio.Text = "El Documento no era válido, se ajustó a número "
+            lblErrorPrecio.Text = "El Precio no era válido, se ajustó a número "
             lblErrorPrecio.Visible = True
         End If
-        If ddlCantidad.SelectedValue = "Seleccionar" Then
+        'Comprobamos el Precio
+        txtStock.Text = txtStock.Text.Trim()
+        If comprobar(txtStock.Text) = False Or Not IsNumeric(txtStock.Text) Then
+            soloNumeros(txtStock)
+            ok = False
+            lblErrorStock.Text = "El Stock no era válido, se ajustó a número "
+            lblErrorStock.Visible = True
+        End If
+        If ddlCategoria.SelectedValue = "Seleccionar" Then
             ok = False
             lblErrorCategoria.Text = "Debe Seleccionar una Categoria para el Producto."
             lblErrorCategoria.Visible = True
@@ -947,7 +955,7 @@ Public Class _Default
             Exit Sub
         End If
         'Si pasa la Validacion lo Insertanos en la DB
-        Dim consulta = "INSERT INTO Productos (CodigoProducto, NombreProducto, MarcaProducto , DescripcionProducto, PrecioProducto, StockProducto, CategoriaProducto, Estado) VALUES ('" & txtCodigoProducto.Text.Trim & "', '" & txtNombreProducto.Text.Trim & "', '" & txtMarca.Text.Trim & "', '" & txtDescripcion.Text.Trim & "', " & NumSql(txtPrecio.Text.Trim) & ", " & NumSql(txtStock.Text.Trim) & ", '" & ddlCantidad.SelectedValue & "', " & ddlEstado.SelectedValue & ")"
+        Dim consulta = "INSERT INTO Productos (CodigoProducto, NombreProducto, MarcaProducto , DescripcionProducto, PrecioProducto, StockProducto, CategoriaProducto, Estado) VALUES ('" & txtCodigoProducto.Text.Trim & "', '" & txtNombreProducto.Text.Trim & "', '" & txtMarca.Text.Trim & "', '" & txtDescripcion.Text.Trim & "', " & NumSql(txtPrecio.Text.Trim) & ", " & NumSql(txtStock.Text.Trim) & ", '" & ddlCategoria.SelectedValue & "', " & ddlEstado.SelectedValue & ")"
         If SqlAccion(consulta) = False Then
             lblErroresProducto.Text = "Se ha producido un error al querer guardar tus datos."
             lblErroresProducto.Visible = True
@@ -957,6 +965,192 @@ Public Class _Default
         pnlAltaProductos.Visible = False
         pnlProductoCreado.Visible = True
         btnVolverAltaProducto.Focus()
+    End Sub
+#End Region
+#Region "Listado de Todos los Productos"
+    Sub listarProductos()
+        'Seleccionamos todos los productos que tiene cargado el usuario en la tabla de pedidos temporal
+        Dim consulta As String = "SELECT CodigoProducto, NombreProducto, MarcaProducto, PrecioProducto, StockProducto FROM Productos ORDER BY MarcaProducto"
+        Dim dataAdapter As New SqlDataAdapter(consulta, con)
+        Dim dataSet As New DataSet
+        'Traemos los datos
+        dataAdapter.Fill(dataSet, "productos")
+        gvListadoProductos.DataSource = dataSet.Tables("productos")
+        gvListadoProductos.DataBind()
+        If dataSet.Tables("productos").Rows.Count = 0 Then
+            lblErrorListadoProductos.Text = ""
+            gvListadoProductos.Visible = False
+        Else
+            gvListadoProductos.Visible = True
+        End If
+
+    End Sub
+#End Region
+#Region "Acciones Botones GridView"
+    Sub accionBotonesGridView(ByVal e As GridViewCommandEventArgs)
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Dim row As GridViewRow = gvListadoProductos.Rows(index)
+        Dim codigoProducto As String = row.Cells(0).Text
+        Select Case e.CommandName
+            Case "Eliminar"
+                If MsgBox("¿Está seguro de eliminar este Producto?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    eliminarProducto(codigoProducto)
+                End If
+            Case "VerEditar"
+                If mostrarDatosProducto(codigoProducto) Then
+                    pnlListadoProductos.Visible = False
+                    pnlEditarProducto.Visible = True
+                End If
+            Case Else
+                lblErrorListadoProductos.Text = "No se Pudeo Ejecutar la Accion Elegida."
+                lblErrorListadoProductos.Visible = True
+        End Select
+
+    End Sub
+#End Region
+#Region "Eliminar Producto"
+    Sub eliminarProducto(ByVal codigoProducto As String)
+        Dim consulta As String = "DELETE Productos WHERE LTRIM(RTRIM(CodigoProducto))='" & codigoProducto & "'"
+        lblErrorPedido.Text = ""
+        If SqlAccion(consulta) = False Then
+            lblErrorListadoProductos.Text = "No se Pudo Eliminar el Producto. Intente más Tarde."
+            lblErrorListadoProductos.Visible = True
+            Exit Sub
+        End If
+        listarProductos()
+    End Sub
+#End Region
+#Region "Mostrar los Datos del Producto Para Editar"
+    Function mostrarDatosProducto(ByVal codigoProducto As String) As Boolean
+        Dim salida As Boolean = True
+        Dim consulta As String = "SELECT * FROM Productos WHERE LTRIM(RTRIM(CodigoProducto))='" & codigoProducto & "'"
+        Dim dataAdapter As New SqlDataAdapter(consulta, con)
+        Dim dataSet As New DataSet
+        lblErrorPedido.Text = ""
+        'Traemos los datos
+        dataAdapter.Fill(dataSet, "productos")
+        If dataSet.Tables("productos").Rows.Count > 0 Then
+            lblErrorListadoProductos.Text = ""
+            lblCodigoProducto.Text = dataSet.Tables("productos").Rows(0)("CodigoProducto").ToString.Trim
+            txtNombreProductoEdit.Text = dataSet.Tables("productos").Rows(0)("NombreProducto").ToString.Trim
+            txtMarcaEdit.Text = dataSet.Tables("productos").Rows(0)("MarcaProducto").ToString.Trim
+            txtDescripcionEdit.Text = dataSet.Tables("productos").Rows(0)("DescripcionProducto").ToString.Trim
+            txtPrecioEdit.Text = dataSet.Tables("productos").Rows(0)("PrecioProducto").ToString.Trim
+            txtStockEdit.Text = dataSet.Tables("productos").Rows(0)("StockProducto").ToString.Trim
+            ddlCategoriaEdit.SelectedValue = dataSet.Tables("productos").Rows(0)("CategoriaProducto").ToString.Trim
+            ddlEstadoEdit.SelectedValue = IIf(dataSet.Tables("productos").Rows(0)("Estado") = False, 0, 1)
+        Else
+            lblErrorListadoProductos.Text = "Surgio un Error. Intente más Tarde."
+            lblErrorListadoProductos.Visible = True
+            salida = False
+        End If
+        Return salida
+    End Function
+#End Region
+#Region "Limpiar Errores Alta Producto"
+
+    'Funcion para Limpiar y Oculatar el Label que Muestra los Errores de Cada Campo 
+    Sub limpiarErroresEditarProducto()
+        'Dejamos Vacios todos los campos
+        lblErrorNombreProductoEdit.Text = ""
+        lblErrorMarcaEdit.Text = ""
+        lblErrorDescripcionEdit.Text = ""
+        lblErrorPrecioEdit.Text = ""
+        lblErrorStockEdit.Text = ""
+        lblErrorCategoriaEdit.Text = ""
+        lblErroresProductoEdit.Text = ""
+        'Ocultamos los Labels de los Errores
+        lblErrorNombreProductoEdit.Visible = False
+        lblErrorMarcaEdit.Visible = False
+        lblErrorDescripcionEdit.Visible = False
+        lblErrorPrecioEdit.Visible = False
+        lblErrorStockEdit.Visible = False
+        lblErrorCategoriaEdit.Visible = False
+        lblErroresProductoEdit.Visible = False
+    End Sub
+#End Region
+#Region "Limpiar Campos Editar Productos"
+    Sub limpiarCamposEditarProducto()
+        'Llamamos a la Funcion para Limpiar los Errores
+        limpiarErroresEditarProducto()
+        txtNombreProductoEdit.Text = ""
+        txtMarcaEdit.Text = ""
+        txtDescripcionEdit.Text = ""
+        txtPrecioEdit.Text = ""
+        txtStockEdit.Text = ""
+        ddlCategoriaEdit.SelectedIndex = 0
+        ddlEstadoEdit.SelectedIndex = 0
+    End Sub
+#End Region
+#Region "Editar Productos"
+    Sub editarProducto()
+        Dim ok As Boolean = True
+        'Llamamos a la Funcion para Limpiar los Errores
+        limpiarErroresEditarProducto()
+        'Comprobamos el Nombre
+        txtNombreProductoEdit.Text = txtNombreProductoEdit.Text.Trim().ToUpper
+        If comprobar(txtNombreProductoEdit.Text) = False Then
+            arreglarCampo(txtNombreProductoEdit)
+            ok = False
+            lblErrorNombreProductoEdit.Text = "El Nombre contenía caracteres inválidos, fueron quitados"
+            lblErrorNombreProductoEdit.Visible = True
+        End If
+        'Comprobamos Marca
+        txtMarcaEdit.Text = txtMarcaEdit.Text.Trim().ToUpper
+        If comprobar(txtMarcaEdit.Text) = False Then
+            arreglarCampo(txtMarcaEdit)
+            ok = False
+            lblErrorMarcaEdit.Text = "La Marca contenía caracteres inválidos, fueron quitados"
+            lblErrorMarcaEdit.Visible = True
+        End If
+        'Comprobamos la Descripcion
+        txtDescripcionEdit.Text = txtDescripcionEdit.Text.Trim().ToUpper
+        If comprobar(txtDescripcionEdit.Text) = False Then
+            arreglarCampo(txtDescripcionEdit)
+            ok = False
+            lblErrorDescripcionEdit.Text = "La Descripción contenía caracteres inválidos, fueron quitados"
+            lblErrorDescripcionEdit.Visible = True
+        End If
+        'Comprobamos el Precio
+        txtPrecioEdit.Text = txtPrecioEdit.Text.Trim()
+        If comprobar(txtPrecioEdit.Text) = False Or Not IsNumeric(txtPrecioEdit.Text) Then
+            soloNumeros(txtPrecioEdit)
+            ok = False
+            lblErrorPrecioEdit.Text = "El Precio no era válido, se ajustó a número "
+            lblErrorPrecioEdit.Visible = True
+        End If
+        'Comprobamos el Stock
+        txtStockEdit.Text = txtStockEdit.Text.Trim()
+        If comprobar(txtStockEdit.Text) = False Or Not IsNumeric(txtStockEdit.Text) Then
+            soloNumeros(txtPrecioEdit)
+            ok = False
+            lblErrorStockEdit.Text = "El Stock no era válido, se ajustó a número "
+            lblErrorStockEdit.Visible = True
+        End If
+        'Comprobamos la Categoria
+        If ddlCategoriaEdit.SelectedValue = "Seleccionar" Then
+            ok = False
+            lblErrorCategoriaEdit.Text = "Debe Seleccionar una Categoria para el Producto."
+            lblErrorCategoriaEdit.Visible = True
+        End If
+        'Si existen Errores los Mostramos el lblErroresProducto
+        If ok = False Then
+            lblErroresProductoEdit.Text = "Surgieron Errores por favor Revisalos e Intenta de Nuevo."
+            lblErroresProductoEdit.Visible = True
+            Exit Sub
+        End If
+        'Si pasa la Validacion lo Insertanos en la DB
+        Dim consulta = "UPDATE Productos SET NombreProducto='" & txtNombreProductoEdit.Text.Trim & "', MarcaProducto='" & txtMarcaEdit.Text.Trim & "' , DescripcionProducto='" & txtDescripcionEdit.Text.Trim & "', PrecioProducto=" & NumSql(txtPrecioEdit.Text.Trim) & ", StockProducto=" & NumSql(txtStockEdit.Text.Trim) & ", CategoriaProducto='" & ddlCategoriaEdit.SelectedValue & "', Estado= " & ddlEstadoEdit.SelectedValue & "WHERE CodigoProducto = " & lblCodigoProducto.Text.Trim
+        If SqlAccion(consulta) = False Then
+            lblErroresProductoEdit.Text = "Se ha producido un error al querer guardar tus datos."
+            lblErroresProductoEdit.Visible = True
+            Exit Sub
+        End If
+        limpiarCamposEditarProducto()
+        pnlEditarProducto.Visible = False
+        pnlProductoEditado.Visible = True
+        lblProductoEditado.Text = lblCodigoProducto.Text
+        btnVolverListado.Focus()
     End Sub
 #End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
@@ -1107,5 +1301,35 @@ Public Class _Default
 
     Protected Sub btnAgregarProducto_Click(sender As Object, e As ImageClickEventArgs) Handles btnAgregarProducto.Click
         altaProducto()
+    End Sub
+
+    Protected Sub btnTodosLosProductos_Click(sender As Object, e As ImageClickEventArgs) Handles btnTodosLosProductos.Click
+        pnlAbmProductos.Visible = False
+        pnlListadoProductos.Visible = True
+        listarProductos()
+    End Sub
+
+    Protected Sub btnVolverAbmProducto_Click(sender As Object, e As ImageClickEventArgs) Handles btnVolverAbmProducto.Click
+        pnlListadoProductos.Visible = False
+        pnlAbmProductos.Visible = True
+    End Sub
+
+    Protected Sub gvListadoProductos_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gvListadoProductos.RowCommand
+        accionBotonesGridView(e)
+    End Sub
+
+    Protected Sub btnCancelarEditarProducto_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarEditarProducto.Click
+        pnlEditarProducto.Visible = False
+        pnlListadoProductos.Visible = True
+    End Sub
+
+    Protected Sub btnEditarProducto_Click(sender As Object, e As ImageClickEventArgs) Handles btnEditarProducto.Click
+        editarProducto()
+    End Sub
+
+    Protected Sub btnVolverListado_Click(sender As Object, e As ImageClickEventArgs) Handles btnVolverListado.Click
+        pnlProductoEditado.Visible = False
+        listarProductos()
+        pnlListadoProductos.Visible = True
     End Sub
 End Class
