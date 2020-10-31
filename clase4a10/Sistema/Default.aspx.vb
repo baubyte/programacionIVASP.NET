@@ -674,14 +674,15 @@ Public Class _Default
 #End Region
 #Region "Mostrar Botones Segun Tipo de Usuario"
     Sub mostrarBotonesUsuario()
+        btnAbmPedidoFabrica.Visible = False
         btnHacerPedidoFabrica.Visible = True
         btnHacerPedido.Visible = False
         btnVerHistorico.Visible = True
         btnAbmProductos.Visible = False
     End Sub
     Sub mostrarBotonesAdmin()
-        btnHacerPedido.Visible = True
-        btnHacerPedidoFabrica.Visible = True
+        btnHacerPedidoFabrica.Visible = False
+        btnAbmPedidoFabrica.Visible = True
         btnAbmProductos.Visible = True
         btnHacerPedido.Visible = False
         btnVerHistorico.Visible = False
