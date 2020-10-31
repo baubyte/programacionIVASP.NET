@@ -41,7 +41,7 @@
     <form id="form1" runat="server">
         <%--Panel Portada--%>
         <asp:Panel ID="pnlPortada" runat="server" Width="765px" Height="350px">
-            <asp:ImageButton ID="btnPortada" ImageUrl="~/imagenes/portada.jpg" ImageAlign="Middle" runat="server" />
+            <asp:ImageButton ID="btnPortada" ImageUrl="~/imagenes/portada.png" ImageAlign="Middle" runat="server" />
         </asp:Panel>
         <%--Panel Login--%>
         <asp:Panel ID="pnlLogin" runat="server" Width="765px" Height="350px" Font-Bold="true" ForeColor="Blue" Font-Size="Large" BorderStyle="Solid" Visible="false" >
