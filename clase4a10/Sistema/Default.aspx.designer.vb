@@ -1526,22 +1526,94 @@ Partial Public Class _Default
     Protected WithEvents btnVolverListado As Global.System.Web.UI.WebControls.ImageButton
 
     '''<summary>
-    '''Control Panel1.
+    '''Control pnlAbmPedidosFabrica.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Panel1 As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pnlAbmPedidosFabrica As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control Label1.
+    '''Control txtNumeroCliente.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtNumeroCliente As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control btnFiltrarCliente.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnFiltrarCliente As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control lblErrorPedidosClientes.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorPedidosClientes As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control gvPedidosClientes.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvPedidosClientes As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control btnActualizarPedidosClientes.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnActualizarPedidosClientes As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control btnVolverAbmPedidosClientes.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnVolverAbmPedidosClientes As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control pnlDetallePedidoCliente.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlDetallePedidoCliente As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control lblNròPedidoCliente.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblNròPedidoCliente As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblNroCliente.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblNroCliente As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control GridView1.
@@ -1553,6 +1625,15 @@ Partial Public Class _Default
     Protected WithEvents GridView1 As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
+    '''Control Label2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control ImageButton1.
     '''</summary>
     '''<remarks>
@@ -1560,13 +1641,4 @@ Partial Public Class _Default
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents ImageButton1 As Global.System.Web.UI.WebControls.ImageButton
-
-    '''<summary>
-    '''Control ImageButton2.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ImageButton2 As Global.System.Web.UI.WebControls.ImageButton
 End Class

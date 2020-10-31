@@ -1292,6 +1292,31 @@ Public Class _Default
 
     End Sub
 #End Region
+#Region "Cargar Pedidos Clientes"
+    Sub cargaPedidosClientes()
+        lblErrorPedidosClientes.Text = ""
+        txtNumeroCliente.Text = txtNumeroCliente.Text.Trim()
+        soloNumeros(txtNumeroCliente)
+        Dim filtro As String
+        If txtNumeroCliente.Text <> "" Then
+            filtro = " WHERE Num_Cli=" & txtNumeroCliente.Text
+        End If
+        Dim selectPedidos As String
+        selectPedidos = "SELECT Num_Cli, NPedido, Fecha, Estado FROM Pedidos" & filtro & " ORDER BY Num_Cli"
+        Dim dataAdapter As New SqlDataAdapter(selectPedidos, con)
+        Dim dataSet As New DataSet
+        dataAdapter.Fill(dataSet, "pedidos")
+        gvPedidosClientes.DataSource = dataSet.Tables("pedidos")
+        gvPedidosClientes.DataBind()
+        If dataSet.Tables("pedidos").Rows.Count = 0 Then
+            lblErrorPedidosClientes.Text = "No hay Pedidos de Clientes o Hubo un Error al Cargarlos. Reintente más Tarde."
+            lblErrorPedidosClientes.Visible = True
+            gvPedidosClientes.Visible = False
+        Else
+            gvPedidosClientes.Visible = True
+        End If
+    End Sub
+#End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()
@@ -1483,5 +1508,24 @@ Public Class _Default
 
     Protected Sub btnActulizarHistorico_Click(sender As Object, e As ImageClickEventArgs) Handles btnActulizarHistorico.Click
         cargaHistorico()
+    End Sub
+
+    Protected Sub btnVolverAbmPedidosClientes_Click(sender As Object, e As ImageClickEventArgs) Handles btnVolverAbmPedidosClientes.Click
+        pnlAbmPedidosFabrica.Visible = False
+        pnlAreaUsuario.Visible = True
+    End Sub
+
+    Protected Sub btnAbmPedidoFabrica_Click(sender As Object, e As ImageClickEventArgs) Handles btnAbmPedidoFabrica.Click
+        cargaPedidosClientes()
+        pnlAbmPedidosFabrica.Visible = True
+        pnlAreaUsuario.Visible = False
+    End Sub
+
+    Protected Sub btnActualizarPedidosClientes_Click(sender As Object, e As ImageClickEventArgs) Handles btnActualizarPedidosClientes.Click
+        cargaPedidosClientes()
+    End Sub
+
+    Protected Sub btnFiltrarCliente_Click(sender As Object, e As ImageClickEventArgs) Handles btnFiltrarCliente.Click
+        cargaPedidosClientes()
     End Sub
 End Class
