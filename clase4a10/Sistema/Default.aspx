@@ -798,8 +798,8 @@
                         <asp:GridView ID="gwVerUnPedido" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" Width="100%">
                             <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
-                                <asp:BoundField DataField="item" HeaderText="Item Solicitado" />
-                                <asp:BoundField DataField="cant" HeaderText="Cant" />
+                                <asp:BoundField DataField="Item" HeaderText="Item Solicitado" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Cant" />
                             </Columns>
                             <FooterStyle BackColor="#CCCCCC" />
                             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />

@@ -1212,7 +1212,68 @@ Public Class _Default
         pnlHistorico.Visible = True
     End Sub
 #End Region
+#Region "Anular  Pedido"
+    Sub anularPedido(ByVal nPedido As String)
+        Dim selectPedido As String = "SELECT * FROM Pedidos WHERE LTRIM(RTRIM(NPedido))=" & nPedido
+        Dim dataAdapter As New SqlDataAdapter(selectPedido, con)
+        Dim dataSet As New DataSet
+        lblNroPedido.Text = nPedido
+        'Traemos los datos
+        dataAdapter.Fill(dataSet, "hitorico")
+        If dataSet.Tables("hitorico").Rows.Count = 0 Then
+            lblErrorHistorico.Text = "No puedo acceder al Pedido Nº: " & nPedido & ". Reintente mas Tarde."
+            Exit Sub
+        End If
+        Dim consulta As String = "DELETE Productos WHERE LTRIM(RTRIM(CodigoProducto))='" & nPedido & "'"
+        lblErrorPedido.Text = ""
+        If SqlAccion(consulta) = False Then
+            lblErrorListadoProductos.Text = "No se Pudo Eliminar el Producto. Intente más Tarde."
+            lblErrorListadoProductos.Visible = True
+            Exit Sub
+        End If
+        listarProductos()
+    End Sub
+#End Region
+#Region "Mostrar los Detalle del Pedido"
+    Sub mostrarDetallePedido(ByVal nPedido As String)
+        Dim consulta As String = "SELECT * FROM Pedidos_Detalle WHERE LTRIM(RTRIM(NPedido))=" & nPedido & " ORDER BY Item"
+        Dim dataAdapter As New SqlDataAdapter(consulta, con)
+        Dim dataSet As New DataSet
+        lblNroPedido.Text = nPedido
+        'Traemos los datos
+        dataAdapter.Fill(dataSet, "detalle")
+        gwVerUnPedido.DataSource = dataSet.Tables("detalle")
+        gwVerUnPedido.DataBind()
+        If dataSet.Tables("detalle").Rows.Count = 0 Then
+            lblErrorVerUnPedido.Text = "Hubo un Error al Cargar los Items del Pedido : " & nPedido & ", porque no se leyó ninguno.Intente más Tarde."
+            lblErrorVerUnPedido.Visible = True
+            gwVerUnPedido.Visible = False
+        Else
+            gwVerUnPedido.Visible = True
+        End If
+    End Sub
+#End Region
+#Region "Acciones Botones GridView Historico"
+    Sub accionBotonesgwHistorico(ByVal e As GridViewCommandEventArgs)
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Dim row As GridViewRow = gwHistorico.Rows(index)
+        Dim nPedido As String = Vnum(row.Cells(2).Text)
+        Select Case e.CommandName
+            Case "Eliminar"
+                If MsgBox("¿Está seguro de Anular este Pedido?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    anularPedido(nPedido)
+                End If
+            Case "Ver"
+                mostrarDetallePedido(nPedido)
+                pnlHistorico.Visible = False
+                pnlVerUnPedido.Visible = True
+            Case Else
+                lblErrorHistorico.Text = "No se Pudeo Ejecutar la Accion Elegida."
+                lblErrorHistorico.Visible = True
+        End Select
 
+    End Sub
+#End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()
@@ -1278,7 +1339,7 @@ Public Class _Default
 
     Protected Sub btnTerminarVerUnPedido_Click(sender As Object, e As ImageClickEventArgs) Handles btnTerminarVerUnPedido.Click
         pnlVerUnPedido.Visible = False
-        pnlPedidosFabrica.Visible = True
+        pnlHistorico.Visible = True
     End Sub
 
     Protected Sub btnCancelarPedido_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarPedido.Click
@@ -1399,6 +1460,6 @@ Public Class _Default
     End Sub
 
     Protected Sub gwHistorico_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gwHistorico.RowCommand
-        ''accionBotonesgvHistorico(e)
+        accionBotonesgwHistorico(e)
     End Sub
 End Class
