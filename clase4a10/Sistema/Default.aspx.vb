@@ -1317,6 +1317,105 @@ Public Class _Default
         End If
     End Sub
 #End Region
+#Region "Mostrar los Detalle del Pedido Cliente"
+    Sub mostrarDetallePedidoCliente(ByVal nPedido As String, ByVal nCliente As String)
+        Dim consulta As String = "SELECT * FROM Pedidos_Detalle WHERE LTRIM(RTRIM(NPedido))=" & nPedido & " ORDER BY Item"
+        Dim dataAdapter As New SqlDataAdapter(consulta, con)
+        Dim dataSet As New DataSet
+        lblNroPedidoCliente.Text = nPedido
+        lblNroCliente.Text = nCliente
+        'Traemos los datos
+        dataAdapter.Fill(dataSet, "detalle")
+        gvDetallePedidoCliente.DataSource = dataSet.Tables("detalle")
+        gvDetallePedidoCliente.DataBind()
+        If dataSet.Tables("detalle").Rows.Count = 0 Then
+            lblErrorDpedidoCliente.Text = "Hubo un Error al Cargar los Items del Pedido : " & nPedido & ", porque no se leyó ninguno.Intente más Tarde."
+            lblErrorDpedidoCliente.Visible = True
+            gvDetallePedidoCliente.Visible = False
+        Else
+            gvDetallePedidoCliente.Visible = True
+        End If
+    End Sub
+#End Region
+#Region "Anular  Pedido Cliente"
+    Sub anularPedidoCliente(ByVal nPedido As String)
+        Dim selectPedido As String = "SELECT * FROM Pedidos WHERE LTRIM(RTRIM(NPedido))=" & nPedido
+        Dim updatePedido As String = "UPDATE Pedidos SET Estado='Anulado' WHERE LTRIM(RTRIM(NPedido))='" & nPedido & "'"
+        Dim dataAdapter As New SqlDataAdapter(selectPedido, con)
+        Dim dataSet As New DataSet
+        lblErrorPedidosClientes.Text = ""
+        'Traemos los datos
+        dataAdapter.Fill(dataSet, "hitorico")
+        If dataSet.Tables("hitorico").Rows.Count = 0 Then
+            lblErrorPedidosClientes.Text = "No puedo acceder al Pedido Nº: " & nPedido & ". Reintente mas Tarde."
+            Exit Sub
+        Else
+            Dim estado As String = dataSet.Tables("hitorico")(0)("Estado").ToString.Trim
+            If estado <> "Solicitado" Then
+                If estado = "Anulado" Then
+                    lblErrorPedidosClientes.Text = "El Pedido Nº: " & nPedido & ". Ya estaba Anulado."
+                    lblErrorPedidosClientes.Visible = True
+                    Exit Sub
+                Else
+                    lblErrorPedidosClientes.Text = "El Pedido tiene Estado: " & estado & " y ya no puede Anularse por Web (sólo Solicitado). Llame a la Fabrica por favor."
+                    lblErrorPedidosClientes.Visible = True
+                    Exit Sub
+                End If
+            Else
+                If SqlAccion(updatePedido) = False Then
+                    lblErrorPedidosClientes.Text = "No he Podido Cambiar el Estado,hubo algún Error de Conexión. Por Favor, Reintente más Tarde."
+                    lblErrorPedidosClientes.Visible = True
+                    Exit Sub
+                Else
+                    lblErrorPedidosClientes.Text = "El Pedido Nº: " & nPedido & "fue Anulado."
+                    lblErrorPedidosClientes.Visible = True
+                    cargaPedidosClientes()
+                    Exit Sub
+                End If
+            End If
+        End If
+    End Sub
+#End Region
+#Region "Acciones Botones GridView Pedidos Clientes"
+    Sub accionBotonesgvPedidosClientes(ByVal e As GridViewCommandEventArgs)
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Dim row As GridViewRow = gvPedidosClientes.Rows(index)
+        Dim nPedido As String = Vnum(row.Cells(0).Text)
+        Dim nCliente As String = Vnum(row.Cells(1).Text)
+        Select Case e.CommandName
+            Case "Anular"
+                If MsgBox("¿Está seguro de Anular este Pedido?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    anularPedidoCliente(nPedido)
+                End If
+            Case "VerEditar"
+                mostrarDetallePedidoCliente(nPedido, nCliente)
+                pnlAbmPedidosFabrica.Visible = False
+                pnlDetallePedidoCliente.Visible = True
+            Case Else
+                lblErrorPedidosClientes.Text = "No se Pudeo Ejecutar la Accion Elegida."
+                lblErrorPedidosClientes.Visible = True
+        End Select
+
+    End Sub
+#End Region
+#Region "Eliminar Item de la Lista de Pedidos Detalle Cliente"
+    Sub quitarItemCliente(ByVal e As GridViewCommandEventArgs)
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Dim row As GridViewRow = gvDetallePedidoCliente.Rows(index)
+        Dim item As String = row.Cells(0).Text, enter As String = Chr(13) & Chr(10)
+        Dim nPedido As Integer = Vnum(lblNroPedidoCliente.Text.Trim)
+        Dim nCliente As Integer = Vnum(lblNroCliente.Text.Trim)
+        Dim consulta As String = "DELETE Pedidos_Detalle WHERE LTRIM(RTRIM(Item)) ='" & item & "' AND NPedido =" & nPedido
+        lblErrorDpedidoCliente.Text = ""
+        If (e.CommandName = "Quitar") Then
+            If SqlAccion(consulta) = False Then
+                lblErrorDpedidoCliente.Text = "No se Pudo Quitar el Item de la Lista. Intente más Tarde."
+                Exit Sub
+            End If
+            mostrarDetallePedidoCliente(nPedido, nCliente)
+        End If
+    End Sub
+#End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()
@@ -1527,5 +1626,19 @@ Public Class _Default
 
     Protected Sub btnFiltrarCliente_Click(sender As Object, e As ImageClickEventArgs) Handles btnFiltrarCliente.Click
         cargaPedidosClientes()
+    End Sub
+
+    Protected Sub gvPedidosClientes_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gvPedidosClientes.RowCommand
+        accionBotonesgvPedidosClientes(e)
+    End Sub
+
+    Protected Sub btnTerminarVolverAbmFabrica_Click(sender As Object, e As ImageClickEventArgs) Handles btnTerminarVolverAbmFabrica.Click
+        cargaPedidosClientes()
+        pnlAbmPedidosFabrica.Visible = True
+        pnlDetallePedidoCliente.Visible = False
+    End Sub
+
+    Protected Sub gvDetallePedidoCliente_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gvDetallePedidoCliente.RowCommand
+        quitarItemCliente(e)
     End Sub
 End Class

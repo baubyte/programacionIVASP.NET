@@ -1227,7 +1227,7 @@
                 </tr>
                 <tr style="text-align: center; vertical-align:central">
                     <td>Nº de Cliente <br />
-                      <asp:TextBox ID="txtNumeroCliente" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" Width="150px" />
+                      <asp:TextBox ID="txtNumeroCliente" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" Width="200px" />
                     </td>
                     <td style="text-align: center; vertical-align:central">
                         <asp:ImageButton ID="btnFiltrarCliente" ImageUrl="~/imagenes/filtrarCliente.png" runat="server" />
@@ -1247,11 +1247,8 @@
                                 <asp:BoundField DataField="Num_Cli" HeaderText="Nº Cliente" />
                                 <asp:BoundField DataField="Fecha" HeaderText="Fecha y Hora" />
                                 <asp:BoundField DataField="estado" HeaderText="Estado" />
-                                <asp:ButtonField ButtonType="Button" CommandName="Editar" Text="Editar">
+                                <asp:ButtonField ButtonType="Button" CommandName="VerEditar" Text="Ver/Editar">
                                 <ControlStyle BackColor="#339933" Font-Bold="True" />
-                                </asp:ButtonField>
-                                <asp:ButtonField ButtonType="Button" CommandName="Ver" Text="Ver">
-                                <ControlStyle BackColor="#FF9933" Font-Bold="True" />
                                 </asp:ButtonField>
                                 <asp:ButtonField ButtonType="Button" CommandName="Anular" Text="Anular">
                                 <ControlStyle BackColor="#FF5050" Font-Bold="True" />
@@ -1278,23 +1275,24 @@
                 </tr>
             </table>
         </asp:Panel>
-    <%--Detalle del Pedido --%>
+        <%--Detalle del Pedido --%>
         <asp:Panel ID="pnlDetallePedidoCliente" runat="server" BorderColor="#66CCFF" ForeColor="#372c57" Font-Size="Large" Visible="false" BackColor="#94bbd4">
             <%--Tabla Botones --%>
             <table style="width: 100%">
                 <tr style="text-align: left">
                     <td>
                         <h3>Datalle del Pedido Nº 
-                        <asp:Label ID="lblNròPedidoCliente" Text="" runat="server" /> &nbsp;del Cliente <asp:Label ID="lblNroCliente" Text="" runat="server" /></h3>
+                        <asp:Label ID="lblNroPedidoCliente" runat="server" /> &nbsp;del Cliente <asp:Label ID="lblNroCliente" Text="" runat="server" /></h3>
                     </td>
                 </tr>
                 <tr style="text-align: center">
                     <td>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" Width="100%">
+                        <asp:GridView ID="gvDetallePedidoCliente" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" Width="100%">
                             <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
                                 <asp:BoundField DataField="Item" HeaderText="Item Solicitado" />
-                                <asp:BoundField DataField="Cantidad" HeaderText="Cant" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                                <asp:ButtonField ButtonType="Image" CommandName="Quitar" ImageUrl="~/imagenes/quitar.png" Text="Quitar" />
                             </Columns>
                             <FooterStyle BackColor="#CCCCCC" />
                             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -1309,12 +1307,12 @@
                 </tr>
                 <tr>
                     <td style="text-align: center">
-                        <asp:Label ID="Label2" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                        <asp:Label ID="lblErrorDpedidoCliente" runat="server" Visible="False" Font-Bold="True" ForeColor="Red" />
                     </td>
                 </tr>
                 <tr style="text-align: center">
                     <td style="text-align: center">
-                        <asp:ImageButton ID="ImageButton1" ImageUrl="~/imagenes/terminarvolver.png" runat="server" />
+                        <asp:ImageButton ID="btnTerminarVolverAbmFabrica" ImageUrl="~/imagenes/terminarvolver.png" runat="server" />
                     </td>
                 </tr>
             </table>

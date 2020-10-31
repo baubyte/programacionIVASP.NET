@@ -1598,13 +1598,13 @@ Partial Public Class _Default
     Protected WithEvents pnlDetallePedidoCliente As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control lblNròPedidoCliente.
+    '''Control lblNroPedidoCliente.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblNròPedidoCliente As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblNroPedidoCliente As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control lblNroCliente.
@@ -1616,29 +1616,29 @@ Partial Public Class _Default
     Protected WithEvents lblNroCliente As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control GridView1.
+    '''Control gvDetallePedidoCliente.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents GridView1 As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents gvDetallePedidoCliente As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
-    '''Control Label2.
+    '''Control lblErrorDpedidoCliente.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblErrorDpedidoCliente As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control ImageButton1.
+    '''Control btnTerminarVolverAbmFabrica.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ImageButton1 As Global.System.Web.UI.WebControls.ImageButton
+    Protected WithEvents btnTerminarVolverAbmFabrica As Global.System.Web.UI.WebControls.ImageButton
 End Class
