@@ -986,8 +986,8 @@ Public Class _Default
 
     End Sub
 #End Region
-#Region "Acciones Botones GridView"
-    Sub accionBotonesGridView(ByVal e As GridViewCommandEventArgs)
+#Region "Acciones Botones GridView ABM Productos"
+    Sub accionBotonesgvListadoProductos(ByVal e As GridViewCommandEventArgs)
         Dim index As Integer = Convert.ToInt32(e.CommandArgument)
         Dim row As GridViewRow = gvListadoProductos.Rows(index)
         Dim codigoProducto As String = row.Cells(0).Text
@@ -1153,6 +1153,66 @@ Public Class _Default
         btnVolverListado.Focus()
     End Sub
 #End Region
+#Region "Solicitar Pedidos"
+    Sub solicitarPedido()
+        Dim idUsuario As Integer = Vnum(Session("idUsuario"))
+        Dim nPedido As Integer = 0, vItem As String = "", vTipo As String = "", vCantidad As Integer = 0
+        Dim linea As String = "", enter As String = Chr(13) & Chr(10)
+        Dim insertPedidos As String, insertPedidosDetalle As String, selectPedidosTemporal As String, selectPedidos As String, deletePedidosTemporal As String
+        lblErrorPedido.Text = ""
+        insertPedidos = "INSERT INTO Pedidos (Num_Cli) VALUES (" & Session("idUsuario") & ")"
+        selectPedidos = "SELECT TOP 1 NPedido FROM Pedidos WHERE Num_Cli=" & Session("idUsuario") & " ORDER BY NPedido DESC"
+        insertPedidosDetalle = "INSERT INTO Pedidos_Detalle (Item, Cantidad, NPedido) "
+        deletePedidosTemporal = "DELETE FROM Pedidos_Temporal WHERE Num_Cli=" & idUsuario
+        If SqlAccion(insertPedidos) = True Then
+            Dim dataAdapter As New SqlDataAdapter(selectPedidos, con)
+            Dim dataSet As New DataSet
+            dataAdapter.Fill(dataSet, "dato")
+            If dataSet.Tables("dato").Rows.Count > 0 Then
+                nPedido = dataSet.Tables("dato").Rows(0)("NPedido")
+                selectPedidosTemporal = "SELECT Pedidos_Temporal.Item, Pedidos_Temporal.Cantidad, " & nPedido & " AS NPedido FROM Pedidos_Temporal WHERE Num_Cli=" & idUsuario
+                If SqlAccion(insertPedidosDetalle & selectPedidosTemporal) = True Then
+                    lblPedidoCreado.Text = "El Pedido Nº " & nPedido & ", fue Creado Correctamente."
+                    pnlNuevoPedidoFabrica.Visible = False
+                    pnlPedidoCreado.Visible = True
+                    If SqlAccion(deletePedidosTemporal) = True Then
+                    End If
+                Else
+                    lblErrorPedido.Text = "Hubo un Error al intentar Guardar el Detalle del Pedido" & nPedido & ", quedó vacío o con una Carga Parcial. Anúlelo e Intente más Tarde."
+                    Exit Sub
+                End If
+                Exit Sub
+            Else
+                lblErrorPedido.Text = "Hubo un Error al intentar Guardar el Detalle del Pedido" & nPedido & ", quedó vacío o con una Carga Parcial. Anúlelo e Intente más Tarde."
+                Exit Sub
+            End If
+        Else
+            lblErrorPedido.Text = "Hubo un Error al intentar Guardar el Pedido. Intente más Tarde."
+        End If
+    End Sub
+#End Region
+#Region "Cargar Historico"
+    Sub cargaHistorico()
+        lblErrorHistorico.Text = ""
+        Dim idUsuario As Integer = Vnum(Session("idUsuario"))
+        Dim selectPedidos As String
+        selectPedidos = "SELECT NPedido, Fecha, Estado FROM Pedidos WHERE Num_Cli=" & Session("idUsuario") & " AND Estado <>'Enviado' ORDER BY NPedido DESC"
+        Dim dataAdapter As New SqlDataAdapter(selectPedidos, con)
+        Dim dataSet As New DataSet
+        dataAdapter.Fill(dataSet, "historico")
+        gwHistorico.DataSource = dataSet.Tables("historico")
+        gwHistorico.DataBind()
+        If dataSet.Tables("historico").Rows.Count > 0 Then
+            lblErrorHistorico.Text = "No hay Pedidos Anteriores o Hubo un Error al Cargarlos. Reintente más Tarde."
+            pnlHistorico.Visible = False
+        Else
+            gwHistorico.Visible = True
+        End If
+        pnlPedidosFabrica.Visible = False
+        pnlHistorico.Visible = True
+    End Sub
+#End Region
+
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()
@@ -1231,6 +1291,7 @@ Public Class _Default
     Protected Sub btnTodosLosPedidos_Click(sender As Object, e As ImageClickEventArgs) Handles btnTodosLosPedidos.Click
         pnlPedidosFabrica.Visible = False
         pnlHistorico.Visible = True
+        CargaHistorico()
     End Sub
 
     Protected Sub btnEntrarAdmin_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrarAdmin.Click
@@ -1315,7 +1376,7 @@ Public Class _Default
     End Sub
 
     Protected Sub gvListadoProductos_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gvListadoProductos.RowCommand
-        accionBotonesGridView(e)
+        accionBotonesgvListadoProductos(e)
     End Sub
 
     Protected Sub btnCancelarEditarProducto_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarEditarProducto.Click
@@ -1331,5 +1392,13 @@ Public Class _Default
         pnlProductoEditado.Visible = False
         listarProductos()
         pnlListadoProductos.Visible = True
+    End Sub
+
+    Protected Sub btnSolicitarPedido_Click(sender As Object, e As ImageClickEventArgs) Handles btnSolicitarPedido.Click
+        solicitarPedido()
+    End Sub
+
+    Protected Sub gwHistorico_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gwHistorico.RowCommand
+        ''accionBotonesgvHistorico(e)
     End Sub
 End Class

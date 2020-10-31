@@ -759,7 +759,7 @@
                                 <ControlStyle BackColor="Red" Font-Bold="True" />
                                 </asp:ButtonField>
                                 <asp:BoundField DataField="NPedido" HeaderText="Nº Pedido" />
-                                <asp:BoundField DataField="fecha" DataFormatString="(0:dd/MM/yyyy HH:mm:tt)" HeaderText="Fecha y Hora" />
+                                <asp:BoundField DataField="Fecha" HeaderText="Fecha y Hora" />
                                 <asp:BoundField DataField="estado" HeaderText="Estado del Pedido" />
                             </Columns>
                             <FooterStyle BackColor="#CCCCCC" />
@@ -799,7 +799,6 @@
                             <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
                                 <asp:BoundField DataField="item" HeaderText="Item Solicitado" />
-                                <asp:BoundField DataField="tipo" HeaderText="Tipo" />
                                 <asp:BoundField DataField="cant" HeaderText="Cant" />
                             </Columns>
                             <FooterStyle BackColor="#CCCCCC" />
