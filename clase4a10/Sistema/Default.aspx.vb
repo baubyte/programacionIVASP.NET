@@ -1202,7 +1202,7 @@ Public Class _Default
         dataAdapter.Fill(dataSet, "historico")
         gwHistorico.DataSource = dataSet.Tables("historico")
         gwHistorico.DataBind()
-        If dataSet.Tables("historico").Rows.Count > 0 Then
+        If dataSet.Tables("historico").Rows.Count = 0 Then
             lblErrorHistorico.Text = "No hay Pedidos Anteriores o Hubo un Error al Cargarlos. Reintente más Tarde."
             pnlHistorico.Visible = False
         Else
@@ -1215,23 +1215,40 @@ Public Class _Default
 #Region "Anular  Pedido"
     Sub anularPedido(ByVal nPedido As String)
         Dim selectPedido As String = "SELECT * FROM Pedidos WHERE LTRIM(RTRIM(NPedido))=" & nPedido
+        Dim updatePedido As String = "UPDATE Pedidos SET Estado='Anulado' WHERE LTRIM(RTRIM(NPedido))='" & nPedido & "'"
         Dim dataAdapter As New SqlDataAdapter(selectPedido, con)
         Dim dataSet As New DataSet
-        lblNroPedido.Text = nPedido
+        lblErrorHistorico.Text = ""
         'Traemos los datos
         dataAdapter.Fill(dataSet, "hitorico")
         If dataSet.Tables("hitorico").Rows.Count = 0 Then
             lblErrorHistorico.Text = "No puedo acceder al Pedido Nº: " & nPedido & ". Reintente mas Tarde."
             Exit Sub
+        Else
+            Dim estado As String = dataSet.Tables("hitorico")(0)("Estado").ToString.Trim
+            If estado <> "Solicitado" Then
+                If estado = "Anulado" Then
+                    lblErrorHistorico.Text = "El Pedido Nº: " & nPedido & ". Ya estaba Anulado."
+                    lblErrorHistorico.Visible = True
+                    Exit Sub
+                Else
+                    lblErrorHistorico.Text = "El Pedido tiene Estado: " & estado & " y ya no puede Anularse por Web (sólo Solicitado). Llame a la Fabrica por favor."
+                    lblErrorHistorico.Visible = True
+                    Exit Sub
+                End If
+            Else
+                If SqlAccion(updatePedido) = False Then
+                    lblErrorHistorico.Text = "No he Podido Cambiar el Estado,hubo algún Error de Conexión. Por Favor, Reintente más Tarde o llame a la Fabrica para Avisar la Anulación."
+                    lblErrorHistorico.Visible = True
+                    Exit Sub
+                Else
+                    lblErrorHistorico.Text = "El Pedido Nº: " & nPedido & "fue Anulado."
+                    lblErrorHistorico.Visible = True
+                    cargaHistorico()
+                    Exit Sub
+                End If
+            End If
         End If
-        Dim consulta As String = "DELETE Productos WHERE LTRIM(RTRIM(CodigoProducto))='" & nPedido & "'"
-        lblErrorPedido.Text = ""
-        If SqlAccion(consulta) = False Then
-            lblErrorListadoProductos.Text = "No se Pudo Eliminar el Producto. Intente más Tarde."
-            lblErrorListadoProductos.Visible = True
-            Exit Sub
-        End If
-        listarProductos()
     End Sub
 #End Region
 #Region "Mostrar los Detalle del Pedido"
@@ -1259,7 +1276,7 @@ Public Class _Default
         Dim row As GridViewRow = gwHistorico.Rows(index)
         Dim nPedido As String = Vnum(row.Cells(2).Text)
         Select Case e.CommandName
-            Case "Eliminar"
+            Case "Anular"
                 If MsgBox("¿Está seguro de Anular este Pedido?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                     anularPedido(nPedido)
                 End If
@@ -1461,5 +1478,9 @@ Public Class _Default
 
     Protected Sub gwHistorico_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gwHistorico.RowCommand
         accionBotonesgwHistorico(e)
+    End Sub
+
+    Protected Sub btnActulizarHistorico_Click(sender As Object, e As ImageClickEventArgs) Handles btnActulizarHistorico.Click
+        cargaHistorico()
     End Sub
 End Class
