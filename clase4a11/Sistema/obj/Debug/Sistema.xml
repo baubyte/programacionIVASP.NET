@@ -1711,9 +1711,9 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
-<member name="F:Sistema._Default._GridView1">
+<member name="F:Sistema._Default._gvAbmUsuarios">
 <summary>
-Control GridView1.
+Control gvAbmUsuarios.
 </summary>
 <remarks>
 Campo generado automáticamente.

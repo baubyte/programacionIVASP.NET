@@ -1494,6 +1494,31 @@ Public Class _Default
     End Sub
 
 #End Region
+#Region "Cargar Usuarios"
+    Sub cargaUsuarios()
+        lblErrorAbmUsuarios.Text = ""
+        txtUsuarioFiltrar.Text = txtUsuarioFiltrar.Text.Trim()
+        arreglarCampo(txtUsuarioFiltrar)
+        Dim filtro As String
+        If txtUsuarioFiltrar.Text <> "" Then
+            filtro = " WHERE Usuario LIKE '%" & txtUsuarioFiltrar.Text & "%'"
+        End If
+        Dim selectUsuarios As String
+        selectUsuarios = "SELECT LTRIM(RTRIM(Usuario)) AS Usuario, LTRIM(RTRIM(EMail)) AS EMail, LTRIM(RTRIM(Nombre))+ ' ' + LTRIM(RTRIM(Apellido)) AS NombreApellido, (CASE WHEN Activo=1 THEN 'Activo' ELSE 'Inactivo' END) AS Activo FROM Usuarios" & filtro & " ORDER BY Usuario"
+        Dim dataAdapter As New SqlDataAdapter(selectUsuarios, con)
+        Dim dataSet As New DataSet
+        dataAdapter.Fill(dataSet, "usuarios")
+        gvAbmUsuarios.DataSource = dataSet.Tables("usuarios")
+        gvAbmUsuarios.DataBind()
+        If dataSet.Tables("usuarios").Rows.Count = 0 Then
+            lblErrorAbmUsuarios.Text = "No hay Usuarios o Hubo un Error al Cargarlos. Reintente más Tarde."
+            lblErrorAbmUsuarios.Visible = True
+            gvAbmUsuarios.Visible = False
+        Else
+            gvAbmUsuarios.Visible = True
+        End If
+    End Sub
+#End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()
@@ -1726,7 +1751,16 @@ Public Class _Default
     End Sub
 
     Protected Sub btnAbmUsuarios_Click(sender As Object, e As ImageClickEventArgs) Handles btnAbmUsuarios.Click
+        cargaUsuarios()
         pnlAreaUsuario.Visible = False
         pnlAbmUsuarios.Visible = True
+    End Sub
+
+    Protected Sub btnFiltrarUsuario_Click(sender As Object, e As ImageClickEventArgs) Handles btnFiltrarUsuario.Click
+        cargaUsuarios()
+    End Sub
+
+    Protected Sub btnActulizarAbmUsuarios_Click(sender As Object, e As ImageClickEventArgs) Handles btnActulizarAbmUsuarios.Click
+        cargaUsuarios()
     End Sub
 End Class
