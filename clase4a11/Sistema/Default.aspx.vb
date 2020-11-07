@@ -1473,7 +1473,7 @@ Public Class _Default
         emailEnviar = dataSet.Tables("recuperar").Rows(0)("Email").ToString.Trim.ToLower
         claveEnviar = dataSet.Tables("recuperar").Rows(0)("Clave").ToString.Trim
         usuarioEnviar = dataSet.Tables("recuperar").Rows(0)("nombre_apellido").ToString.Trim
-        mensaje = "Hola " & usuarioEnviar & "," & enter & "Te escribimos desde BAUBYTE, respondiendo a su pedido de Recuperación de Clave" & enter & enter & "Su Usuario es: " & usuario & enter & "Su Clave es: " & claveEnviar & enter & enter & "Ya podes volver a Entrar y Armar tus Pedidos" & enter & "Saludos desde BAUBYTE" & enter & enter & enter & enter & "(Por Favor no Responda esté Email, es automático. Gracias.)" & enter & enter
+        mensaje = "Hola " & usuarioEnviar & "," & enter & "Te escribimos desde BAUBYTE, respondiendo a tu pedido de Recuperación de Clave" & enter & enter & "Su Usuario es: " & usuario & enter & "Su Clave es: " & claveEnviar & enter & enter & "Ya podes volver a Entrar y Armar tus Pedidos" & enter & "Saludos desde BAUBYTE" & enter & enter & enter & enter & "(Por Favor no Responda esté Email, es automático. Gracias.)" & enter & enter
         Dim ok As String = enviarMail(emailEnviar, "BAUBYTE, Recuperación de Clave", mensaje)
         If ok = "OK" Then
             lblReenviarClave.Text = "**** Te Eviamos un Email Por Tu Clave."
