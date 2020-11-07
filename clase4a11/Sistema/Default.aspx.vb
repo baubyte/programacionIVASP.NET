@@ -1424,6 +1424,13 @@ Public Class _Default
         Dim item As String = row.Cells(0).Text, enter As String = Chr(13) & Chr(10)
         Dim nPedido As Integer = Vnum(lblNroPedidoCliente.Text.Trim)
         Dim nCliente As Integer = Vnum(lblNroCliente.Text.Trim)
+        Dim selectUsuarioPedido = "SELECT EMail FROM Usuarios WHERE idUsuario = " & nCliente
+        Dim dataAdapterMail As New SqlDataAdapter(selectUsuarioPedido, con)
+        Dim dataSetMail As New DataSet
+        dataAdapterMail.Fill(dataSetMail, "mail")
+        Dim mail As String = dataSetMail.Tables("mail").Rows(0)("EMail").ToString.Trim()
+        Dim mensaje As String = "El Administrador ha Quitado " & item & " de tu Lista de Pedido."
+        dataAdapterMail.Fill(dataSetMail, "mail")
         Dim consulta As String = "DELETE Pedidos_Detalle WHERE LTRIM(RTRIM(Item)) ='" & item & "' AND NPedido =" & nPedido
         lblErrorDpedidoCliente.Text = ""
         If (e.CommandName = "Quitar") Then
@@ -1431,6 +1438,7 @@ Public Class _Default
                 lblErrorDpedidoCliente.Text = "No se Pudo Quitar el Item de la Lista. Intente más Tarde."
                 Exit Sub
             End If
+            enviarMail(mail, "Item Eliminado", mensaje)
             mostrarDetallePedidoCliente(nPedido, nCliente)
         End If
     End Sub
