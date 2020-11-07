@@ -708,6 +708,7 @@
                     </td>
                     <td colspan="2">
                         <asp:ImageButton ID="btnSolicitarPedido" ImageUrl="~/imagenes/solicitar.png" runat="server" />
+                        <asp:Label ID="lblListaPedido" Text="" runat="server" Visible="True"/>
                     </td>
                     <td>
                         <asp:ImageButton ID="btnCancelarPedido" ImageUrl="~/imagenes/cancelarpedido.png" runat="server" />
@@ -1357,7 +1358,7 @@
                                 <asp:ButtonField ButtonType="Button" CommandName="Desactivar" Text="Desactivar">
                                 <ControlStyle BackColor="#FF9933" Font-Bold="True" />
                                 </asp:ButtonField>
-                                <asp:ButtonField ButtonType="Button" CommandName="Borrar" Text="Borrar">
+                                <asp:ButtonField ButtonType="Button" CommandName="Eliminar" Text="Eliminar">
                                 <ControlStyle BackColor="#FF5050" Font-Bold="True" />
                                 </asp:ButtonField>
                             </Columns>
@@ -1378,6 +1379,43 @@
                     </td>
                     <td>
                         <asp:ImageButton ID="btnTerminarAbmUsuarios" ImageUrl="~/imagenes/terminarvolver.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <%--Panel Motivo --%>
+        <asp:Panel ID="pnlMotivo" runat="server" BorderColor="#66CCFF" ForeColor="#372c57" Font-Size="Large" Visible="false" BackColor="#94bbd4">
+            <%--Tabla Datos para Registro--%>
+            <table style="width: 100%">
+                <%--Campos y Validacion Email.--%>
+                <tr>
+                    <td>Estas por: <asp:Label ID="lblAccionMotivo" Text="" runat="server" Font-Bold="true"/></td>
+                    <td>
+                        El Usuario: <asp:Label ID="lblUsuarioAccion" Text="" runat="server" Font-Bold="true"/>
+                        <asp:Label ID="lblEmailAccion" Text="" runat="server" Font-Bold="true" Visible="false"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Indique Motivo:</td>
+                    <td>
+                        <asp:TextBox ID="txtMotivo" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" MaxLength="250" Rows="6" Columns="50" TextMode="MultiLine" />
+                    </td>
+                </tr>
+                <%--Todos los Errores--%>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <asp:Label ID="lblErrorMotivo" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+            </table>
+            <%--Tabla Botones --%>
+            <table style="width: 100%">
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="btnConfirmarAbmUsuarios" ImageUrl="~/imagenes/confirmarAccionUsuario.png" runat="server" />
+                    </td>
+                    <td>
+                        <asp:ImageButton ID="btnCancelarAbmUsuarios" ImageUrl="~/imagenes/cancelarvolver.png" runat="server" />
                     </td>
                 </tr>
             </table>

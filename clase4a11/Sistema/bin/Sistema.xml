@@ -955,6 +955,15 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:Sistema._Default._lblListaPedido">
+<summary>
+Control lblListaPedido.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:Sistema._Default._btnCancelarPedido">
 <summary>
 Control btnCancelarPedido.
@@ -1732,6 +1741,78 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:Sistema._Default._btnTerminarAbmUsuarios">
 <summary>
 Control btnTerminarAbmUsuarios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._pnlMotivo">
+<summary>
+Control pnlMotivo.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblAccionMotivo">
+<summary>
+Control lblAccionMotivo.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblUsuarioAccion">
+<summary>
+Control lblUsuarioAccion.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblEmailAccion">
+<summary>
+Control lblEmailAccion.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._txtMotivo">
+<summary>
+Control txtMotivo.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorMotivo">
+<summary>
+Control lblErrorMotivo.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnConfirmarAbmUsuarios">
+<summary>
+Control btnConfirmarAbmUsuarios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnCancelarAbmUsuarios">
+<summary>
+Control btnCancelarAbmUsuarios.
 </summary>
 <remarks>
 Campo generado automáticamente.

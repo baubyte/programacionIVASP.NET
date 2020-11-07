@@ -932,6 +932,15 @@ Partial Public Class _Default
     Protected WithEvents btnSolicitarPedido As Global.System.Web.UI.WebControls.ImageButton
 
     '''<summary>
+    '''Control lblListaPedido.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblListaPedido As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control btnCancelarPedido.
     '''</summary>
     '''<remarks>
@@ -1713,4 +1722,76 @@ Partial Public Class _Default
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnTerminarAbmUsuarios As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control pnlMotivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlMotivo As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control lblAccionMotivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblAccionMotivo As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblUsuarioAccion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblUsuarioAccion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblEmailAccion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblEmailAccion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtMotivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtMotivo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorMotivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorMotivo As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control btnConfirmarAbmUsuarios.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnConfirmarAbmUsuarios As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control btnCancelarAbmUsuarios.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCancelarAbmUsuarios As Global.System.Web.UI.WebControls.ImageButton
 End Class

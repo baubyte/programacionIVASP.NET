@@ -632,7 +632,7 @@ Public Class _Default
             lblErrorLogin.Visible = True
             Exit Sub
         End If
-        Dim da1 As New SqlDataAdapter("SELECT * FROM " & Session("QueEs") & " WHERE UPPER(LTRIM(RTRIM(usuario)))='" & usu & "' AND LTRIM(RTRIM(clave))='" & pass & "'", con)
+        Dim da1 As New SqlDataAdapter("SELECT * FROM " & Session("QueEs") & " WHERE UPPER(LTRIM(RTRIM(usuario)))='" & usu & "' AND LTRIM(RTRIM(clave))='" & pass & "' AND Activo = 1", con)
         Dim ds1 As New DataSet
         da1.Fill(ds1, "Login")
         If ds1.Tables("Login").Rows.Count = 0 Then
@@ -809,6 +809,7 @@ Public Class _Default
         If producto = "-----------" Then Exit Sub
         'Obtenemos la Cantidad de los Productos
         Dim cantidad As Integer = Vnum(ddlCantidad.SelectedValue.ToString)
+        lblListaPedido.Text = lblListaPedido.Text & " Producto: " & producto & "Cantidad: " & cantidad
         'Si la cantidad es 0 salimos
         If cantidad <= 0 Then Exit Sub
         lblErrorPedido.Text = ""
@@ -1519,6 +1520,64 @@ Public Class _Default
         End If
     End Sub
 #End Region
+#Region "Accion Botones gvAbmUsuarios"
+    Sub accionBotenesgvAbmUsuarios(ByVal e As GridViewCommandEventArgs)
+        Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+        Dim row As GridViewRow = gvAbmUsuarios.Rows(index)
+        lblUsuarioAccion.Text = row.Cells(0).Text
+        lblEmailAccion.Text = row.Cells(1).Text
+        Select Case e.CommandName
+            Case "Eliminar"
+                If MsgBox("¿Está seguro de eliminar este Usuario?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    lblAccionMotivo.Text = "Eliminar"
+                End If
+            Case "Desactivar"
+                If MsgBox("¿Está seguro de Desactivar este Usuario?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    lblAccionMotivo.Text = "Desactivar"
+                End If
+            Case Else
+                lblErrorAbmUsuarios.Text = "No se Pudeo Ejecutar la Accion Elegida."
+                lblErrorAbmUsuarios.Visible = True
+        End Select
+        pnlAbmUsuarios.Visible = False
+        pnlMotivo.Visible = True
+    End Sub
+#End Region
+#Region "Acciones Motivos ABM Usuarios"
+    Sub accionMotivoAbmUsuarios()
+        Dim accion As String = lblAccionMotivo.Text.Trim
+        Dim usuario As String = lblUsuarioAccion.Text.Trim
+        Dim email As String = lblEmailAccion.Text.ToLower.Trim
+        Dim mensaje As String = txtMotivo.Text
+        Dim queryEliminar As String = "DELETE Usuarios WHERE LTRIM(RTRIM(Usuario)) ='" & usuario & "'"
+        Dim queryDesactivar As String = "UPDATE Usuarios SET Activo = 0 WHERE LTRIM(RTRIM(Usuario)) ='" & usuario & "'"
+        If comprobar(txtMotivo.Text) = False Then
+            arreglarCampo(txtMotivo)
+            lblErrorMotivo.Text = "El Motivo contenía caracteres inválidos, fueron quitados"
+            lblErrorMotivo.Visible = True
+            Exit Sub
+        End If
+        Select Case accion
+            Case "Eliminar"
+                If SqlAccion(queryEliminar) = False Then
+                    lblErroresProductoEdit.Text = "Se ha producido un error al querer guardar tus datos."
+                    lblErroresProductoEdit.Visible = True
+                    Exit Sub
+                End If
+                enviarMail(email, "BAUBYTE, Usuario Eliminado", mensaje)
+            Case "Desactivar"
+                If SqlAccion(queryDesactivar) = False Then
+                    lblErrorMotivo.Text = "Se ha producido un error al querer guardar tus datos."
+                    lblErrorMotivo.Visible = True
+                    Exit Sub
+                End If
+                enviarMail(email, "BAUBYTE, Usuario Desactivado", mensaje)
+        End Select
+        cargaUsuarios()
+        pnlMotivo.Visible = False
+        pnlAbmUsuarios.Visible = True
+    End Sub
+#End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()
@@ -1762,5 +1821,19 @@ Public Class _Default
 
     Protected Sub btnActulizarAbmUsuarios_Click(sender As Object, e As ImageClickEventArgs) Handles btnActulizarAbmUsuarios.Click
         cargaUsuarios()
+    End Sub
+
+    Protected Sub gvAbmUsuarios_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gvAbmUsuarios.RowCommand
+        accionBotenesgvAbmUsuarios(e)
+    End Sub
+
+    Protected Sub btnCancelarAbmUsuarios_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarAbmUsuarios.Click
+        pnlMotivo.Visible = False
+        pnlAbmUsuarios.Visible = True
+        cargaUsuarios()
+    End Sub
+
+    Protected Sub btnConfirmarAbmUsuarios_Click(sender As Object, e As ImageClickEventArgs) Handles btnConfirmarAbmUsuarios.Click
+        accionMotivoAbmUsuarios()
     End Sub
 End Class
