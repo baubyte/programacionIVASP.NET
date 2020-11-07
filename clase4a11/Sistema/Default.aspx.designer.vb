@@ -932,15 +932,6 @@ Partial Public Class _Default
     Protected WithEvents btnSolicitarPedido As Global.System.Web.UI.WebControls.ImageButton
 
     '''<summary>
-    '''Control lblListaPedido.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblListaPedido As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''Control btnCancelarPedido.
     '''</summary>
     '''<remarks>

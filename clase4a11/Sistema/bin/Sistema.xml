@@ -955,15 +955,6 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
-<member name="F:Sistema._Default._lblListaPedido">
-<summary>
-Control lblListaPedido.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
 <member name="F:Sistema._Default._btnCancelarPedido">
 <summary>
 Control btnCancelarPedido.

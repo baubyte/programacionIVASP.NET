@@ -809,7 +809,6 @@ Public Class _Default
         If producto = "-----------" Then Exit Sub
         'Obtenemos la Cantidad de los Productos
         Dim cantidad As Integer = Vnum(ddlCantidad.SelectedValue.ToString)
-        lblListaPedido.Text = lblListaPedido.Text & " Producto: " & producto & "Cantidad: " & cantidad
         'Si la cantidad es 0 salimos
         If cantidad <= 0 Then Exit Sub
         lblErrorPedido.Text = ""
@@ -1183,8 +1182,17 @@ Public Class _Default
             If dataSet.Tables("dato").Rows.Count > 0 Then
                 nPedido = dataSet.Tables("dato").Rows(0)("NPedido")
                 selectPedidosTemporal = "SELECT Pedidos_Temporal.Item, Pedidos_Temporal.Cantidad, " & nPedido & " AS NPedido FROM Pedidos_Temporal WHERE Num_Cli=" & idUsuario
+
                 If SqlAccion(insertPedidosDetalle & selectPedidosTemporal) = True Then
                     lblPedidoCreado.Text = "El Pedido Nº " & nPedido & ", fue Creado Correctamente."
+                    Dim dataAdapterMail As New SqlDataAdapter(selectPedidosTemporal, con)
+                    Dim dataSetMail As New DataSet
+                    Dim mensaje As String
+                    dataAdapterMail.Fill(dataSetMail, "mail")
+                    For index = 0 To dataSetMail.Tables("mail").Rows.Count - 1
+                        mensaje = mensaje & " Producto: " & dataSetMail.Tables("mail").Rows(index)("Item").ToString.Trim & " Cantidad: " & dataSetMail.Tables("mail").Rows(index)("Cantidad").ToString.Trim & enter
+                    Next
+                    enviarMail(Email, "Ingreso de Pedido", mensaje)
                     pnlNuevoPedidoFabrica.Visible = False
                     pnlPedidoCreado.Visible = True
                     If SqlAccion(deletePedidosTemporal) = True Then
@@ -1462,7 +1470,7 @@ Public Class _Default
         Return resultado
     End Function
 #End Region
-#Region "Recuperacion de Contraeña"
+#Region "Recuperacion de Contraseña"
     Sub recuperarClave()
         Dim usuario As String = txtUsuario.Text.Trim.ToUpper, emailEnviar As String, usuarioEnviar As String, mensaje As String, claveEnviar As String
         Dim enter As String = Chr(13) & Chr(10)

@@ -708,7 +708,6 @@
                     </td>
                     <td colspan="2">
                         <asp:ImageButton ID="btnSolicitarPedido" ImageUrl="~/imagenes/solicitar.png" runat="server" />
-                        <asp:Label ID="lblListaPedido" Text="" runat="server" Visible="True"/>
                     </td>
                     <td>
                         <asp:ImageButton ID="btnCancelarPedido" ImageUrl="~/imagenes/cancelarpedido.png" runat="server" />
