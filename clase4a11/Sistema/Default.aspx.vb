@@ -40,7 +40,7 @@ Public Class _Default
     End Sub
 
     Protected Sub btnReenviarClave_Click(sender As Object, e As ImageClickEventArgs) Handles btnReenviarClave.Click
-
+        recuperarClave()
     End Sub
 
     Protected Sub btnIrLogin_Click(sender As Object, e As ImageClickEventArgs) Handles btnIrLogin.Click
@@ -1417,7 +1417,7 @@ Public Class _Default
     End Sub
 #End Region
 #Region "Envio de Emails"
-    Function enviarMaik(ByVal emailDestino As String, ByVal subjet As String, ByVal mensaje As String) As String
+    Function enviarMail(ByVal emailDestino As String, ByVal subjet As String, ByVal mensaje As String) As String
         'Devuelve OK si se envio el mail caso contrario Devuelve el error.
         Dim resultado As String = "OK"
         Dim smtpServer As New SmtpClient()
@@ -1452,8 +1452,37 @@ Public Class _Default
     End Function
 #End Region
 #Region "Recuparacion de Contraeña"
-    Dim usuario As String = txtUsuario.Text.Trim.ToUpper, emailEnviar As String, xUsuario As String, mensaje As String, pass As String
-    Dim enter As String = Chr(13) & Chr(10)
+    Sub recuperarClave()
+        Dim usuario As String = txtUsuario.Text.Trim.ToUpper, emailEnviar As String, usuarioEnviar As String, mensaje As String, claveEnviar As String
+        Dim enter As String = Chr(13) & Chr(10)
+        If comprobar(usuario) = False Then
+            lblReenviarClave.Text = "**** El Usuario es Incorrecto Revisá Por Favor."
+            lblReenviarClave.Visible = True
+            Exit Sub
+        End If
+        Dim selectUsuario As String = "SELECT LTRIM(RTRIM(Nombre))+ ' ' + LTRIM(RTRIM(Apellido)) AS nombre_apellido, Clave, Email FROM Usuarios WHERE UPPER(LTRIM(RTRIM(Usuario)))='" & usuario & "'"
+        Dim dataAdapter As New SqlDataAdapter(selectUsuario, con)
+        Dim dataSet As New DataSet
+        'Traemos los datos
+        dataAdapter.Fill(dataSet, "recuperar")
+        If dataSet.Tables("recuperar").Rows.Count = 0 Then
+            lblReenviarClave.Text = "**** El Usuario es Incorrecto Revisá Por Favor."
+            lblReenviarClave.Visible = True
+            Exit Sub
+        End If
+        emailEnviar = dataSet.Tables("recuperar").Rows(0)("Email").ToString.Trim.ToLower
+        claveEnviar = dataSet.Tables("recuperar").Rows(0)("Clave").ToString.Trim
+        usuarioEnviar = dataSet.Tables("recuperar").Rows(0)("nombre_apellido").ToString.Trim
+        mensaje = "Hola " & usuarioEnviar & "," & enter & "Te escribimos desde BAUBYTE, respondiendo a su pedido de Recuperación de Clave" & enter & enter & "Su Usuario es: " & usuario & enter & "Su Clave es: " & claveEnviar & enter & enter & "Ya podes volver a Entrar y Armar tus Pedidos" & enter & "Saludos desde BAUBYTE" & enter & enter & enter & enter & "(Por Favor no Responda esté Email, es automático. Gracias.)" & enter & enter
+        Dim ok As String = enviarMail(emailEnviar, "BAUBYTE, Recuperación de Clave", mensaje)
+        If ok = "OK" Then
+            lblReenviarClave.Text = "**** Te Eviamos un Email Por Tu Clave."
+        Else
+            lblReenviarClave.Text = "**** Hubo un Error al Enviar el Email."
+        End If
+        lblReenviarClave.Visible = True
+    End Sub
+
 #End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
