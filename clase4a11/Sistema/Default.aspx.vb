@@ -1416,6 +1416,45 @@ Public Class _Default
         End If
     End Sub
 #End Region
+#Region "Envio de Emails"
+    Function enviarMaik(ByVal emailDestino As String, ByVal subjet As String, ByVal mensaje As String) As String
+        'Devuelve OK si se envio el mail caso contrario Devuelve el error.
+        Dim resultado As String = "OK"
+        Dim smtpServer As New SmtpClient()
+        Dim mail As New MailMessage()
+        Try
+            mail = New MailMessage()
+            mail.From = New MailAddress(Email, "BAUBYTE")
+            mail.To.Add(emailDestino)
+            mail.Subject = subjet
+            mail.Body = mensaje
+            mail.IsBodyHtml = False
+            mail.Priority = MailPriority.Normal
+            If EmailActivo = "EmailGmail" Then
+                smtpServer.Credentials = New Net.NetworkCredential(Email, EmailPass)
+                smtpServer.Host = "smtp.gmail.com"
+                smtpServer.Port = 587
+                smtpServer.EnableSsl = True
+            Else
+                'Para EmailDonWeb
+                'smtpServer.Host = "localhost"
+                smtpServer.Credentials = New Net.NetworkCredential(Email, EmailPass)
+                smtpServer.Host = "dtcwin033.ferozo.com"
+                smtpServer.Port = 467
+                smtpServer.EnableSsl = True
+            End If
+            smtpServer.Send(mail)
+        Catch
+            resultado = Err.Description
+        End Try
+        mail.Dispose()
+        Return resultado
+    End Function
+#End Region
+#Region "Recuparacion de Contraeña"
+    Dim usuario As String = txtUsuario.Text.Trim.ToUpper, emailEnviar As String, xUsuario As String, mensaje As String, pass As String
+    Dim enter As String = Chr(13) & Chr(10)
+#End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()
