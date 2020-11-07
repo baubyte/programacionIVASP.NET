@@ -206,9 +206,17 @@ Public Class _Default
             Exit Sub
         End If
         Session("idUsuario") = Vnum(LeeUnCampo("SELECT TOP 1 idUsuario FROM usuarios WHERE Usuario='" & Session("Usuario") & "'and Clave='" & Session("Password") & "' ", "idUsuario"))
-        lblBienvenido.Text = "Bienvenido " & Session("ApellidoYNombre") & "!!!"
+
         Dim mensaje As String, xusuario As String = Session("ApellidoYNombre"), en As String = Chr(13) & Chr(10)
-        mensaje = "Bienvenido " & xusuario & " a los Cursos de ASP .NET!." & en & en & "Te damos una cordial bienvenida al a comunidad de ASP.NET !." & en & en & "Tu usuario es " & " " & Session("Usuario") & " " & en & en & "Tu clave es " & " " & Session("Password") & " " & en & en & "Ya podés loguearte para ver tus datos! !." & en & en
+        mensaje = "Bienvenido " & xusuario & " a BAUBYTE, Equipamientos Informaticos." & en & en & "Te damos una cordial Bienvenida a BAUBYTE." & en & en & "Tu usuario es " & " " & Session("Usuario") & " " & en & en & "Tu clave es " & " " & Session("Password") & " " & en & en & "Ya podés loguearte para ver tus datos! !." & en & en
+
+        Dim okEnviarMail As String = enviarMail(Session("Email"), "BAUBYTE, Registro de Usuario", mensaje)
+        If okEnviarMail = "OK" Then
+            lblBienvenido.Text = "Bienvenido " & Session("ApellidoYNombre") & "!!!" & en & en & "Te Eviamos un Email con Todos tus Datos."
+        Else
+            lblBienvenido.Text = "Bienvenido " & Session("ApellidoYNombre") & "!!!" & en & en & "Hubo un Error al Enviar el Email con Tus Datos de Usuario."
+        End If
+        lblBienvenido.Visible = True
         limpiarCamposRegistroU()
         pnlRegistrarse.Visible = False
         pnlBienvenido.Visible = True
@@ -1451,7 +1459,7 @@ Public Class _Default
         Return resultado
     End Function
 #End Region
-#Region "Recuparacion de Contraeña"
+#Region "Recuperacion de Contraeña"
     Sub recuperarClave()
         Dim usuario As String = txtUsuario.Text.Trim.ToUpper, emailEnviar As String, usuarioEnviar As String, mensaje As String, claveEnviar As String
         Dim enter As String = Chr(13) & Chr(10)
