@@ -683,6 +683,7 @@ Public Class _Default
 #Region "Mostrar Botones Segun Tipo de Usuario"
     Sub mostrarBotonesUsuario()
         btnAbmPedidoFabrica.Visible = False
+        btnAbmUsuarios.Visible = False
         btnHacerPedidoFabrica.Visible = True
         btnHacerPedido.Visible = False
         btnVerHistorico.Visible = True
@@ -690,6 +691,7 @@ Public Class _Default
     End Sub
     Sub mostrarBotonesAdmin()
         btnHacerPedidoFabrica.Visible = False
+        btnAbmUsuarios.Visible = True
         btnAbmPedidoFabrica.Visible = True
         btnAbmProductos.Visible = True
         btnHacerPedido.Visible = False
@@ -1716,5 +1718,15 @@ Public Class _Default
 
     Protected Sub gvDetallePedidoCliente_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gvDetallePedidoCliente.RowCommand
         quitarItemCliente(e)
+    End Sub
+
+    Protected Sub btnTerminarAbmUsuarios_Click(sender As Object, e As ImageClickEventArgs) Handles btnTerminarAbmUsuarios.Click
+        pnlAbmUsuarios.Visible = False
+        pnlAreaUsuario.Visible = True
+    End Sub
+
+    Protected Sub btnAbmUsuarios_Click(sender As Object, e As ImageClickEventArgs) Handles btnAbmUsuarios.Click
+        pnlAreaUsuario.Visible = False
+        pnlAbmUsuarios.Visible = True
     End Sub
 End Class

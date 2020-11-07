@@ -577,6 +577,15 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:Sistema._Default._btnAbmUsuarios">
+<summary>
+Control btnAbmUsuarios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:Sistema._Default._btnHacerPedidoFabrica">
 <summary>
 Control btnHacerPedidoFabrica.
@@ -1660,6 +1669,69 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:Sistema._Default._btnTerminarVolverAbmFabrica">
 <summary>
 Control btnTerminarVolverAbmFabrica.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._pnlAbmUsuarios">
+<summary>
+Control pnlAbmUsuarios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._txtUsuarioFiltrar">
+<summary>
+Control txtUsuarioFiltrar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnFiltrarUsuario">
+<summary>
+Control btnFiltrarUsuario.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._lblErrorAbmUsuarios">
+<summary>
+Control lblErrorAbmUsuarios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._GridView1">
+<summary>
+Control GridView1.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnActulizarAbmUsuarios">
+<summary>
+Control btnActulizarAbmUsuarios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:Sistema._Default._btnTerminarAbmUsuarios">
+<summary>
+Control btnTerminarAbmUsuarios.
 </summary>
 <remarks>
 Campo generado automáticamente.

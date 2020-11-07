@@ -395,6 +395,11 @@
                 </tr>
                 <tr>
                     <td style="text-align: center">
+                        <asp:ImageButton ID="btnAbmUsuarios" ImageUrl="~/imagenes/abmUsuarios.png" runat="server" Width="263px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
                         <asp:ImageButton ID="btnHacerPedidoFabrica" ImageUrl="~/imagenes/pedidosfabrica.png" runat="server" Visible="false" />
                     </td>
                 </tr>
@@ -1313,6 +1318,66 @@
                 <tr style="text-align: center">
                     <td style="text-align: center">
                         <asp:ImageButton ID="btnTerminarVolverAbmFabrica" ImageUrl="~/imagenes/terminarvolver.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <%--Panel ABM Usuarios --%>
+<asp:Panel ID="pnlAbmUsuarios" runat="server" BorderColor="#66CCFF" ForeColor="#372c57" Font-Size="Large" Visible="false" BackColor="#94bbd4">
+            <%--Tabla Botones --%>
+            <table style="width: 100%">
+                <tr style="text-align: center">
+                    <td colspan="2">
+                        <h1>Listado de Usuarios</h1>
+                    </td>
+                </tr>
+                <tr style="text-align: center; vertical-align:central">
+                    <td>Usuario
+                        <br />
+                      <asp:TextBox ID="txtUsuarioFiltrar" runat="server" Font-Bold="true" Font-Size="Medium" ForeColor="White" BackColor="#382858" Width="200px" />
+                    </td>
+                    <td style="text-align: center; vertical-align:central">
+                        <asp:ImageButton ID="btnFiltrarUsuario" ImageUrl="~/imagenes/filtrarCliente.png" runat="server" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <asp:Label ID="lblErrorAbmUsuarios" runat="server" Visible="False" Font-Bold="True" ForeColor="Red" />
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td colspan="2">
+                        <asp:GridView ID="gvAbmUsuarios" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" Width="100%">
+                            <AlternatingRowStyle BackColor="#CCCCCC" />
+                            <Columns>
+                                <asp:BoundField DataField="Usuario" HeaderText="Usuario" />
+                                <asp:BoundField DataField="EMail" HeaderText="Email" />
+                                <asp:BoundField DataField="NombreApellido" HeaderText="Nombre y Apellido" />
+                                <asp:BoundField DataField="Activo" HeaderText="Estado" />
+                                <asp:ButtonField ButtonType="Button" CommandName="Desactivar" Text="Desactivar">
+                                <ControlStyle BackColor="#FF9933" Font-Bold="True" />
+                                </asp:ButtonField>
+                                <asp:ButtonField ButtonType="Button" CommandName="Borrar" Text="Borrar">
+                                <ControlStyle BackColor="#FF5050" Font-Bold="True" />
+                                </asp:ButtonField>
+                            </Columns>
+                            <FooterStyle BackColor="#CCCCCC" />
+                            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                            <SortedAscendingHeaderStyle BackColor="#808080" />
+                            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                            <SortedDescendingHeaderStyle BackColor="#383838" />
+                        </asp:GridView>
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="btnActulizarAbmUsuarios" ImageUrl="~/imagenes/actualizar.png" runat="server" />
+                    </td>
+                    <td>
+                        <asp:ImageButton ID="btnTerminarAbmUsuarios" ImageUrl="~/imagenes/terminarvolver.png" runat="server" />
                     </td>
                 </tr>
             </table>
