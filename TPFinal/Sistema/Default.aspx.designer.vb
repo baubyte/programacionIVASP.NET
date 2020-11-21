@@ -1697,6 +1697,15 @@ Partial Public Class _Default
     Protected WithEvents pnlAbmUsuarios As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
+    '''Control lblTipoUsuarios.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblTipoUsuarios As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control txtUsuarioFiltrar.
     '''</summary>
     '''<remarks>

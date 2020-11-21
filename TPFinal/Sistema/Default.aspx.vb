@@ -1510,6 +1510,7 @@ Public Class _Default
 #End Region
 #Region "Cargar Usuarios"
     Sub cargaUsuarios()
+        lblTipoUsuarios.Text = Session("tipoUsuarioAbm")
         lblErrorAbmUsuarios.Text = ""
         txtUsuarioFiltrar.Text = txtUsuarioFiltrar.Text.Trim()
         arreglarCampo(txtUsuarioFiltrar)
@@ -1524,6 +1525,11 @@ Public Class _Default
         dataAdapter.Fill(dataSet, "usuarios")
         gvAbmUsuarios.DataSource = dataSet.Tables("usuarios")
         gvAbmUsuarios.DataBind()
+        If Session("tipoUsuarioAbm") = "Administradores" Then
+            gvAbmUsuarios.Columns(6).Visible = False
+        Else
+            gvAbmUsuarios.Columns(6).Visible = True
+        End If
         If dataSet.Tables("usuarios").Rows.Count = 0 Then
             lblErrorAbmUsuarios.Text = "No hay Usuarios o Hubo un Error al Cargarlos. Reintente más Tarde."
             lblErrorAbmUsuarios.Visible = True

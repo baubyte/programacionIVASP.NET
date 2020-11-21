@@ -1364,7 +1364,7 @@
             <table style="width: 100%">
                 <tr style="text-align: center">
                     <td colspan="2">
-                        <h1>Listado de Usuarios</h1>
+                        <h1>Listado de <asp:Label ID="lblTipoUsuarios" Text="" runat="server" /></h1>
                     </td>
                 </tr>
                 <tr style="text-align: center; vertical-align:central">

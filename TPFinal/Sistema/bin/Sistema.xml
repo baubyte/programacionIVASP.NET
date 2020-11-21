@@ -1720,6 +1720,15 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:Sistema._Default._lblTipoUsuarios">
+<summary>
+Control lblTipoUsuarios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:Sistema._Default._txtUsuarioFiltrar">
 <summary>
 Control txtUsuarioFiltrar.
