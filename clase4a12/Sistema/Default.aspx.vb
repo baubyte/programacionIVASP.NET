@@ -176,6 +176,7 @@ Public Class _Default
         Session("Password") = txtClaveU.Text
         Session("TipoDocumento") = ddlTipoDocU.SelectedValue.Trim
         Session("Documento") = txtDocU.Text.Trim
+        Session("Email") = txtEmailU.Text.Trim
         'Comprobamos si Existe en la DB
         If YaExisteSql("SELECT idusuario FROM usuarios WHERE usuario='" & Session("Usuario") & "'") Then
             ok = False
@@ -186,6 +187,11 @@ Public Class _Default
             ok = False
             lblErrorDocU.Text = "Ya existe el " & Session("TipoDocumento") & " " & Session("Documento") & "."
             lblErrorDocU.Visible = True
+        End If
+        If YaExisteSql("SELECT idusuario FROM usuarios WHERE Email='" & Session("Email") & "'") Then
+            ok = False
+            lblErrorEmailU.Text = "El Emial Ingresado ya se Encuentra Registrado."
+            lblErrorEmailU.Visible = True
         End If
         If ok = False Then
             lblErroresU.Text = "Solo se permite una inscripción por persona."
@@ -199,28 +205,19 @@ Public Class _Default
         Session("ApellidoYNombre") = txtNombreU.Text.Trim & " " & txtApellidoU.Text.Trim
         Session("Email") = txtEmailU.Text.Trim
         limpiarErroresRegistroU()
-        'Si pasa la Validacion lo Insertanos en la DB
-        If SqlAccion("INSERT INTO Usuarios (Apellido, Nombre, tDoc , Documento, Usuario, Clave, Email, idProv , Localidad,Domicilio, Telefono, fNacimiento) VALUES ( '" & txtApellidoU.Text.Trim & "','" & txtNombreU.Text.Trim & "', '" & Session("TipoDocumento") & "','" & Session("Documento") & "','" & Session("Usuario") & "', '" & Session("Password") & "' , '" & Session("Email") & "'," & ddlProvU.SelectedValue & ", '" & txtLocalidadU.Text.Trim & "' , '" & txtDireccionU.Text.Trim & "','" & txtTelefonoU.Text.Trim & "','" & FechaNacimiento.ToString("yyyy-MM-dd") & " ' ) ") = False Then
-            lblErroresU.Text = "Se ha producido un error al querer guardar tus datos."
-            lblErroresU.Visible = True
-            Exit Sub
-        End If
-        Session("idUsuario") = Vnum(LeeUnCampo("SELECT TOP 1 idUsuario FROM usuarios WHERE Usuario='" & Session("Usuario") & "'and Clave='" & Session("Password") & "' ", "idUsuario"))
+        Session("sqlIngreso") = "INSERT INTO Usuarios (Apellido, Nombre, tDoc , Documento, Usuario, Clave, Email, idProv , Localidad,Domicilio, Telefono, fNacimiento) VALUES ( '" & txtApellidoU.Text.Trim & "','" & txtNombreU.Text.Trim & "', '" & Session("TipoDocumento") & "','" & Session("Documento") & "','" & Session("Usuario") & "', '" & Session("Password") & "' , '" & Session("Email") & "'," & ddlProvU.SelectedValue & ", '" & txtLocalidadU.Text.Trim & "' , '" & txtDireccionU.Text.Trim & "','" & txtTelefonoU.Text.Trim & "','" & FechaNacimiento.ToString("yyyy-MM-dd") & " ' ) "
+        Dim codigo As String = crearCodigo(4)
+        Session("codigo") = codigo
+        Dim mensaje As String, en As String = Chr(13) & Chr(10)
 
-        Dim mensaje As String, xusuario As String = Session("ApellidoYNombre"), en As String = Chr(13) & Chr(10)
-        mensaje = "Bienvenido " & xusuario & " a BAUBYTE, Equipamientos Informaticos." & en & en & "Te damos una cordial Bienvenida a BAUBYTE." & en & en & "Tu usuario es " & " " & Session("Usuario") & " " & en & en & "Tu clave es " & " " & Session("Password") & " " & en & en & "Ya podés loguearte para ver tus datos! !." & en & en
+        mensaje = "Saludos " & Session("ApellidoYNombre") & "." & en & en & "Te escribimos de BAUBYTE, Equipamientos Informaticos, respuesta a tu solicitud de registro como un nuevo usuario de nuestr aplicación. " & en & en & "Por favor, ingresa el código: " & codigo & " en el cuadro de texto de la aplicación Web y presioná Validar. Esto completara tu registro como un Nuevo Usuario de BAUBYTE, Equipamientos Informaticos." & en & en & "Felicitaciones" & en & en & "El Equipo de BAUBYTE, Equipamientos Informaticos" & en & en & en & en & "(Por favor, no respondas éste mail, es automático... Muchas Gracias.)" & en & en
 
-        Dim okEnviarMail As String = enviarMail(Session("Email"), "BAUBYTE, Registro de Usuario", mensaje)
-        If okEnviarMail = "OK" Then
-            lblBienvenido.Text = "Bienvenido " & Session("ApellidoYNombre") & "!!!" & en & en & "Te Eviamos un Email con Todos tus Datos."
-        Else
-            lblBienvenido.Text = "Bienvenido " & Session("ApellidoYNombre") & "!!!" & en & en & "Hubo un Error al Enviar el Email con Tus Datos de Usuario."
-        End If
-        lblBienvenido.Visible = True
-        limpiarCamposRegistroU()
+        Dim okEnviarMail As String = enviarMail(Session("Email"), "BAUBYTE, Validar Email", mensaje)
+
+        txtValidar.Text = ""
+        lblErrorCodidoValidar.Visible = False
         pnlRegistrarse.Visible = False
-        pnlBienvenido.Visible = True
-        btnRegistrarseVolverLoginU.Focus()
+        pnlValidarMail.Visible = True
     End Sub
 #End Region
 #Region "Limpiar Campos"
@@ -1609,6 +1606,45 @@ Public Class _Default
         Return strRand
     End Function
 #End Region
+#Region "Validar Email y Terminar Registro"
+    Sub validarCodigo()
+        Dim sqlIngreso As String = Session("sqlIngreso") & " "
+        If sqlIngreso.Length < 10 Or sqlIngreso.IndexOf("INSERT") < 0 Then
+            lblErroresU.Text = "Hubo un error con el Código. Por Favor, trate de generar un nuevo código."
+            Exit Sub
+            lblErroresU.Visible = True
+            pnlValidarMail.Visible = False
+            pnlRegistrarse.Visible = True
+        End If
+        If txtValidar.Text.Trim.ToUpper <> Session("codigo") Then
+            lblErrorCodidoValidar.Visible = True
+            Exit Sub
+        End If
+        'Si pasa la Validacion lo Insertanos en la DB
+        If SqlAccion(sqlIngreso) = False Then
+            lblErroresU.Text = "Hubo un error al tratar de validar el Código. Por Favor, trate de generar un nuevo código."
+            lblErroresU.Visible = True
+            Exit Sub
+        End If
+        Session("idUsuario") = Vnum(LeeUnCampo("SELECT TOP 1 idUsuario FROM usuarios WHERE Usuario='" & Session("Usuario") & "'and Clave='" & Session("Password") & "' ", "idUsuario"))
+
+        Dim mensaje As String, xusuario As String = Session("ApellidoYNombre"), en As String = Chr(13) & Chr(10)
+        mensaje = "Bienvenido " & xusuario & " a BAUBYTE, Equipamientos Informaticos." & en & en & "Te damos una cordial Bienvenida a BAUBYTE." & en & en & "Tu usuario es " & " " & Session("Usuario") & " " & en & en & "Tu clave es " & " " & Session("Password") & " " & en & en & "Ya podés loguearte para ver tus datos! !." & en & en
+
+        Dim okEnviarMail As String = enviarMail(Session("Email"), "BAUBYTE, Registro de Usuario", mensaje)
+        If okEnviarMail = "OK" Then
+            lblBienvenido.Text = "Bienvenido " & Session("ApellidoYNombre") & "!!!" & en & en & "Te Eviamos un Email con Todos tus Datos."
+        Else
+            lblBienvenido.Text = "Bienvenido " & Session("ApellidoYNombre") & "!!!" & en & en & "Hubo un Error al Enviar el Email con Tus Datos de Usuario."
+        End If
+
+        lblBienvenido.Visible = True
+        limpiarCamposRegistroU()
+        pnlValidarMail.Visible = False
+        pnlBienvenido.Visible = True
+        btnRegistrarseVolverLoginU.Focus()
+    End Sub
+#End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()
@@ -1866,5 +1902,21 @@ Public Class _Default
 
     Protected Sub btnConfirmarAbmUsuarios_Click(sender As Object, e As ImageClickEventArgs) Handles btnConfirmarAbmUsuarios.Click
         accionMotivoAbmUsuarios()
+    End Sub
+
+    Protected Sub btnValidarCodigo_Click(sender As Object, e As EventArgs) Handles btnValidarCodigo.Click
+        validarCodigo()
+    End Sub
+
+    Protected Sub btnRegresarRegistro_Click(sender As Object, e As EventArgs) Handles btnRegresarRegistro.Click
+        pnlValidarMail.Visible = False
+        txtValidar.Text = ""
+        pnlRegistrarse.Visible = True
+    End Sub
+
+    Protected Sub btnCancelarRegistro_Click(sender As Object, e As ImageClickEventArgs) Handles btnCancelarRegistro.Click
+        pnlValidarMail.Visible = False
+        txtValidar.Text = ""
+        pnlRegistrarse.Visible = True
     End Sub
 End Class

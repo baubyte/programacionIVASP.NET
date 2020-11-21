@@ -132,7 +132,7 @@
             </table>
         </asp:Panel>
         <%--Panel Registrarse--%>
-        <asp:Panel ID="pnlRegistrarse" runat="server" Height="850px" ForeColor="#372C57" Font-Size="Large" Visible="false" BackImageUrl="~/imagenes/fondo.jpg">
+        <asp:Panel ID="pnlRegistrarse" runat="server" ForeColor="#372C57" Font-Size="Large" Visible="false" BackColor="#94bbd4">
             <%--Tabla Titulos de Registro e Informacion--%>
             <table style="width:100%">
                 <tr>
@@ -1077,7 +1077,7 @@
             </table>
         </asp:Panel>
         <%--Panel Editar Productos --%>
-        <asp:Panel ID="pnlEditarProducto" runat="server" ForeColor="#372C57" Font-Size="Large" Visible="false" BackImageUrl="~/imagenes/fondo.jpg">
+        <asp:Panel ID="pnlEditarProducto" runat="server" ForeColor="#372C57" Font-Size="Large" Visible="false" BackColor="#94bbd4">
             <%--Tabla Titulos de Registro e Informacion--%>
             <table style="width: 100%">
                 <tr>
@@ -1443,7 +1443,7 @@
                 <%--Todos los Errores--%>
                 <tr>
                     <td style="text-align: center">
-                        <asp:Label ID="lblErrorCodidoValidar" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                        <asp:Label ID="lblErrorCodidoValidar" Text="***Código de Verificación Inválido***" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
                     </td>
                 </tr>
                 <tr style="text-align: center">
