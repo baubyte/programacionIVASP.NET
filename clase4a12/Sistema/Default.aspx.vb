@@ -1594,6 +1594,21 @@ Public Class _Default
         pnlAbmUsuarios.Visible = True
     End Sub
 #End Region
+#Region "Generar Codigo Validar Email"
+    Public Function crearCodigo(ByVal cantCaracteres As Integer) As String
+        'Crear un código de tantos carteres como cantidad de caracteres le pasamenos, mezclando números y letras mayusculas
+        Dim strRand As String = Nothing, r As New Random, c As String, i As Integer
+        For index = 0 To cantCaracteres - 1
+            If Math.Round(r.Next(0, 2)) = 0 Then
+                c = Chr(Math.Round(r.Next(48, 58)))
+            Else
+                c = Chr(Math.Round(r.Next(65, 91)))
+            End If
+            strRand &= c
+        Next
+        Return strRand
+    End Function
+#End Region
     Protected Sub btnEntrar_Click(sender As Object, e As ImageClickEventArgs) Handles btnEntrar.Click
         Session("QueEs") = "Usuarios"
         Loguea()

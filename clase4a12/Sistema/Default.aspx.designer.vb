@@ -1785,4 +1785,58 @@ Partial Public Class _Default
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnCancelarAbmUsuarios As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control pnlValidarMail.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlValidarMail As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control txtValidar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtValidar As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblErrorCodidoValidar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblErrorCodidoValidar As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control btnValidarCodigo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnValidarCodigo As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control btnRegresarRegistro.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnRegresarRegistro As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control btnCancelarRegistro.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCancelarRegistro As Global.System.Web.UI.WebControls.ImageButton
 End Class

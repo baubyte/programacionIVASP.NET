@@ -1419,6 +1419,50 @@
                 </tr>
             </table>
         </asp:Panel>
+<%--Panel Verificar Email --%>
+<asp:Panel ID="pnlValidarMail" runat="server" BorderColor="#66CCFF" Height="489px" ForeColor="#372c57" Font-Size="Large" Visible="false" BackImageUrl="~/imagenes/datospersonales.jpg">
+            <%--Tabla Datos para Registro--%>
+            <table style="width: 100%">
+                <%--Campos y Validacion Email.--%>
+                <tr style="text-align: center">
+                    <td></td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <h3>
+                            Te hemos enviado un código de verificación al email que ingresaste. Abrí el email, copiá el código y pegalo en el cuadro de texto a continuacón. Luego oprimí Validar. Para conrregir algún dato ingresaod, oprimí "Volver al Registro"; o bien "Cancelar y Volver" para anular la operacion y volver al Login.
+                        </h3>
+                    </td>
+                </tr>
+                <%--Campos y Validacion Codigo --%>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:TextBox ID="txtValidar" runat="server" Font-Bold="true" Font-Size="Large" ForeColor="White" BackColor="#382858" MaxLength="6" />
+                    </td>
+                </tr>
+                <%--Todos los Errores--%>
+                <tr>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblErrorCodidoValidar" Text="" runat="server" Visible="false" Font-Bold="true" ForeColor="Red" />
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:Button ID="btnValidarCodigo" Text="Validar el Código" runat="server" Font-Bold="true" BackColor="#339966" Height="59px" Width="228px" Font-Size="Large"/>
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:Button ID="btnRegresarRegistro" Text="Regresar al Registro" runat="server" Font-Bold="true" BackColor="#CCCC00" Height="59px" Width="228px" Font-Size="Large"/>
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <asp:ImageButton ID="btnCancelarRegistro" ImageUrl="~/imagenes/cancelarvolver.png" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
     </form>
 </body>
 </html>
